@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "genre": "Punk"
+    },
+    {
+        "id": 2,
+        "genre": "Indie"
+    },
+    {
+        "id": 3,
+        "genre": "Alternative"
+    },
+    {
+        "id": 4,
+        "genre": "Rock"
+    },
+    {
+        "id": 5,
+        "genre": "Metal"
+    },
+    {
+        "id": 6,
+        "genre": "Blues"
+    },
+    {
+        "id": 7,
+        "genre": "Jazz"
+    },
+    {
+        "id": 8,
+        "genre": "Pop"
+    },
+    {
+        "id": 9,
+        "genre": "Klassik"
+    },
+    {
+        "id": 10,
+        "genre": "Hip Hop"
+    },
+    {
+        "id": 11,
+        "genre": "Deutscher Rap"
+    },
+    {
+        "id": 12,
+        "genre": "Schlager"
+    },
+    {
+        "id": 13,
+        "genre": "Soul"
+    },
+    {
+        "id": 14,
+        "genre": "Dance/Electronic"
+    },
+    {
+        "id": 15,
+        "genre": "RnB"
+    },
+    {
+        "id": 16,
+        "genre": "Funk"
+    },
+    {
+        "id": 17,
+        "genre": "Blues"
+    },
+    {
+        "id": 18,
+        "genre": "Folk"
+    },
+    {
+        "id": 19,
+        "genre": "Latin"
+    },
+    {
+        "id": 20,
+        "genre": "K-pop"
+    }
+]

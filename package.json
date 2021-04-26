@@ -1,0 +1,33 @@
+{
+  "name": "musik-quiz-app",
+  "version": "0.0.1",
+  "description": "Musik Quiz WebApp",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christianp86/musik-quiz-app.git"
+  },
+  "keywords": [
+    "webapp",
+    "musik",
+    "quiz"
+  ],
+  "author": "Christian Pfisterer & Johannes Tschorn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christianp86/musik-quiz-app/issues"
+  },
+  "homepage": "https://github.com/christianp86/musik-quiz-app#readme",
+  "devDependencies": {
+    "snowpack": "^3.0.11",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "bootstrap": "^5.0.0-beta3"
+  }
+}
