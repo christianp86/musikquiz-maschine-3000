@@ -15,11 +15,22 @@ const musikQuiz: Musikquiz = {
 } */
 
 window.addEventListener('DOMContentLoaded', () => {
-    createQuiz(3,5)
-    .then((data) => {
-        console.table(data)
-    })
-    .catch((error) => {console.error(error)})
+
+    const generateQuizButton = document.querySelector("#quiztime") as HTMLButtonElement;
+    generateQuizButton.addEventListener("click", async () => {
+        const questionsHtmlInput = document.querySelector("#fragen") as HTMLInputElement;
+        const questionsPerRound = parseInt(questionsHtmlInput.value);
+        const quizRoundsHtmlInput = document.querySelector("#runden") as HTMLInputElement;
+        const quizRounds = parseInt(quizRoundsHtmlInput.value)
+        try {
+            const quiz = await createQuiz(quizRounds, questionsPerRound)
+        } catch (error) {
+            console.error(error)
+        }
+
+
+    });
+
 });
 /* window.addEventListener('DOMContentLoaded', () => {
      const section = document.querySelector("#genres") as HTMLElement
@@ -61,12 +72,12 @@ async function getQuestions(): Promise<Question[]> {
 async function createQuiz(rounds: Number, questions: Number): Promise<MusikquizResult> {
 
     const questionPool = await getQuestions();
-    let musikQuizResult: MusikquizResult = {rounds: []};
+    let musikQuizResult: MusikquizResult = { rounds: [] };
 
     for (let index = 0; index < rounds; index++) {
-        const mqRound: Round = {roundNumber: index, questions: []};
+        const mqRound: Round = { roundNumber: index, questions: [] };
         for (let index = 0; index < questions; index++) {
-            mqRound.questions.push(questionPool[randomInt(0,18)])
+            mqRound.questions.push(questionPool[randomInt(0, 18)])
         }
         musikQuizResult.rounds.push(mqRound);
     }
