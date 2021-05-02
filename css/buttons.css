@@ -11,3 +11,14 @@
     cursor: pointer;
     border-radius: 12px;
   }
+
+.button-start {
+  background: #264653;
+  border: 1px solid #F4A261;
+  border-radius: 4px;
+  font-family: OpenSans-Bold;
+  font-size: 28px;
+  color: #F4A261;
+  text-align: center;
+  line-height: 24px;
+}
