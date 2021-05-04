@@ -11,7 +11,7 @@
 
 <body>
     <main>
-        <section class="welcome">
+        <div class="section welcome">
             <div id="container">
                 <div class="card">
                     <div class="card__details">
@@ -27,34 +27,82 @@
                             pharetra
                             vitae ipsum odio.</p>
                         <div class="mm-button-container">
-                            <button class="mm-button-start">Erstellen! Jetzt!</button>
+                            <a href="#questions"><button class="mm-button-start">Erstellen!
+                                    Jetzt!</button></a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="questions">
+        <div id="questions" class="section questions">
+            <div id="container">
+                <div class="card">
+                    <div class="card__details">
+
+                        <!-- A div with name class for the name of the card -->
+                        <div class="name mm-header-size mm-questions-color">
+                            Wieviele Fragen pro Runde willst du stellen?
+                        </div>
+
+                        <p class="mm-questions-color">Als Richtlininie: 10 Fragen dauern c.a. 15 Minuten. </p>
+                        <div>
+                            <input type="number" id="questions" min="1" max="10" />
+                        </div>
+                        <div class="mm-button-container">
+                            <a href="#rounds"><button class="mm-button-start">Weiter</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="rounds" class="section rounds">
+            <div id="container">
+                <div class="card">
+                    <div class="card__details">
+
+                        <!-- A div with name class for the name of the card -->
+                        <div class="name mm-header-size mm-rounds-color">
+                            Wieviele Runden soll das Quiz gehen?
+                        </div>
+
+                        <p class="mm-rounds-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur
+                            sodales morbi dignissim
+                            sed diam
+                            pharetra
+                            vitae ipsum odio.</p>
+                        <div>
+                            <input type="number" id="rounds" min="1" max="10" />
+                        </div>
+                        <div class="mm-button-container">
+                            <button class="mm-button-start" onclick="">Musikquiz erstellen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
             <div id="container">
                 <div class="card">
                     <div class="card__details">
 
                         <!-- A div with name class for the name of the card -->
                         <div class="name">
-                            Anzahl Runden
+                            Dein Musikquiz 3000
                         </div>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur sodales morbi dignissim
-                            sed diam
-                            pharetra
-                            vitae ipsum odio.</p>
+                        <div id="quizTable">
+                            <!-- The quiz table will be added here -->
+                        </div>
                         <div class="mm-button-container">
-                            <button class="mm-button-start">Weiter</button>
+                            <button class="mm-button-start">Download</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
 </body>

@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const quizRoundsHtmlInput = document.querySelector("#runden") as HTMLInputElement;
         const quizRounds = parseInt(quizRoundsHtmlInput.value)
         try {
-            const quiz = await createQuiz(quizRounds, questionsPerRound)
+            const quiz = await createQuizData(quizRounds, questionsPerRound)
         } catch (error) {
             console.error(error)
         }
@@ -69,7 +69,7 @@ async function getQuestions(): Promise<Question[]> {
     return questionPool;
 }
 
-async function createQuiz(rounds: Number, questions: Number): Promise<MusikquizResult> {
+async function createQuizData(rounds: Number, questions: Number): Promise<MusikquizResult> {
 
     const questionPool = await getQuestions();
     let musikQuizResult: MusikquizResult = { rounds: [] };
@@ -85,5 +85,16 @@ async function createQuiz(rounds: Number, questions: Number): Promise<MusikquizR
     return musikQuizResult;
 }
 
+async function renderQuizTable(event: HTMLElementEventMap) {
+    const questionsHtmlInput = document.querySelector("#fragen") as HTMLInputElement;
+    const questionsPerRound = parseInt(questionsHtmlInput.value);
+    const quizRoundsHtmlInput = document.querySelector("#runden") as HTMLInputElement;
+    const quizRounds = parseInt(quizRoundsHtmlInput.value);
 
+    try {
+        const quiz = await createQuizData(quizRounds, questionsPerRound)
+    } catch (error) {
+        console.error(error)
+    }
+}
 
