@@ -18,17 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const generateQuizButton = document.querySelector("#quiztime") as HTMLButtonElement;
     generateQuizButton.addEventListener("click", async () => {
-        const questionsHtmlInput = document.querySelector("#fragen") as HTMLInputElement;
-        const questionsPerRound = parseInt(questionsHtmlInput.value);
-        const quizRoundsHtmlInput = document.querySelector("#runden") as HTMLInputElement;
-        const quizRounds = parseInt(quizRoundsHtmlInput.value)
-        try {
-            const quiz = await createQuizData(quizRounds, questionsPerRound)
-        } catch (error) {
-            console.error(error)
-        }
-
-
+        await renderQuiz()
     });
 
 });
@@ -60,7 +50,7 @@ function randomInt(min: number, max: number): number {
 async function getQuestions(): Promise<Question[]> {
     let questionPool: Question[] = [];
     try {
-        const data = await fetch("./data/questions.json");
+        const data = await fetch("./src/data/questions.json");
         questionPool = await data.json();
     } catch (error) {
         console.log(error)
@@ -85,16 +75,62 @@ async function createQuizData(rounds: Number, questions: Number): Promise<Musikq
     return musikQuizResult;
 }
 
-async function renderQuizTable(event: HTMLElementEventMap) {
-    const questionsHtmlInput = document.querySelector("#fragen") as HTMLInputElement;
+async function renderQuiz() {
+    const questionsHtmlInput = document.querySelector("#questionsInput") as HTMLInputElement;
     const questionsPerRound = parseInt(questionsHtmlInput.value);
-    const quizRoundsHtmlInput = document.querySelector("#runden") as HTMLInputElement;
+    const quizRoundsHtmlInput = document.querySelector("#roundsInput") as HTMLInputElement;
     const quizRounds = parseInt(quizRoundsHtmlInput.value);
+    let quiz:MusikquizResult = {rounds : []};
 
     try {
-        const quiz = await createQuizData(quizRounds, questionsPerRound)
+        quiz = await createQuizData(quizRounds, questionsPerRound)
     } catch (error) {
         console.error(error)
+        return;
+    }
+
+
+    /* <div id="round1" class="mm-quiz-round-container">
+                                <div class="mm-quiz-round-container-header">
+                                    Runde 1
+                                </div>
+                                <div class="mm-quiz-round-container-questions">
+                                    <ol>
+                                        <li>BLABLASBLA</li>
+                                        <li>Seulem epsum psum</li>
+                                    </ol>
+                                </div>
+                            </div> */
+    const quizGrid = document.querySelector('#quizGrid') as HTMLDivElement;
+
+    for (const quizRound of quiz.rounds) {
+        // Round Container
+        const divRoundContainer = document.createElement('div') as HTMLDivElement
+        divRoundContainer.classList.add('mm-quiz-round-container')
+
+        // Header Text
+        const divRoundHeader = document.createElement('div') as HTMLDivElement
+        divRoundHeader.classList.add('mm-quiz-round-container-header')
+        divRoundHeader.innerText = `Runde ${quizRound.roundNumber}`
+
+        // Questions Container
+        const divRoundQuestions = document.createElement('div') as HTMLDivElement
+        divRoundQuestions.classList.add('mm-quiz-round-container-questions')
+
+        // Questions list
+        const questionList = document.createElement('ol') as HTMLOListElement
+
+        for(const question of quizRound.questions) {
+            const questionItem = document.createElement('li') as HTMLLIElement
+            questionItem.innerText = question.question
+            questionList.append(questionItem)
+        }
+
+        divRoundContainer.append(divRoundHeader)
+        divRoundContainer.append(divRoundQuestions)
+        divRoundQuestions.append(questionList)
+        
+        quizGrid.append(divRoundContainer)
     }
 }
 
