@@ -1,11 +1,11 @@
 interface Genre {
-    id: Number;
-    genre: String
+    id: number;
+    genre: string
 }
 
 interface Question {
-    id: Number;
-    question: String
+    id: number;
+    question: string
 }
 
 interface Musikquiz {
