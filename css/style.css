@@ -113,6 +113,7 @@ main {
     grid-template-columns: 50% 50%;
     justify-content: space-evenly;
     border: 4px solid #E9C46A;
+    margin-top: 5vh;
   }
 
   .mm-quiz-round-container {
@@ -127,6 +128,21 @@ main {
 
   .mm-quiz-round-container-questions {
     font-size: small
+  }
+
+  .mm-quiz-h1 {
+    display:block;
+    font-size: 16px;
+    color: #264653;
+    line-height: 38px;
+  }
+
+  .mm-quiz-h2 {
+    display:block;
+    font-size: 48px;
+    font-weight: bold;
+    color: #264653;
+    line-height: 38px;
   }
 
   ol {

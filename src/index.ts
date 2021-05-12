@@ -64,7 +64,7 @@ async function createQuizData(rounds: Number, questions: Number): Promise<Musikq
     const questionPool = await getQuestions();
     let musikQuizResult: MusikquizResult = { rounds: [] };
 
-    for (let index = 0; index < rounds; index++) {
+    for (let index = 1; index <= rounds; index++) {
         const mqRound: Round = { roundNumber: index, questions: [] };
         for (let index = 0; index < questions; index++) {
             mqRound.questions.push(questionPool[randomInt(0, 18)])
