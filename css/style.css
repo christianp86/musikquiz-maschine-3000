@@ -26,6 +26,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+  overflow: auto;
 }
 
 #container {
@@ -48,6 +49,7 @@ main {
 
   .quiz {
     background: #F4A261;
+    ;
   }
 
   .card {  
@@ -81,6 +83,7 @@ main {
 
   .mm-header-size {
     font-size: 48px;
+    font-weight: bold;
   }
 
   .mm-questions-color {
@@ -96,7 +99,7 @@ main {
   }
 
   .mm-button-start {
-    background: #264653;
+    background-color: #264653;
     border: 1px solid #F4A261;
     border-radius: 4px;
     font-family: OpenSans-Bold;
@@ -106,6 +109,35 @@ main {
     line-height: 24px;
     padding: 12px 24px;
     margin-top: 5vh;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .mm-step-text {
+    padding-top: 3vh;
+    font-size: smaller;
+  }
+
+  .mm-input-questions {
+    border: none;
+    border-bottom: 4px solid #043b35;
+  }
+
+  .mm-input-text {
+    font-size: xx-large;
+    text-align: center;
+    color: #E9C46A;
+    width: 10vw;
+  }
+
+  .mm-input-rounds {
+    border: none;
+    border-bottom: 4px solid #264653;
+  }
+
+  .mm-button-start:hover {
+    background-color: #264653;
+    color: white;
   }
 
   .mm-quiz-container {

@@ -41,14 +41,25 @@
                 <div class="card">
                     <div class="card__details">
 
+                        <div class="name">
+                            Musikquiz Maschine 3000
+                        </div>
+
+                        <div class="mm-questions-color mm-step-text">
+                            1. Schritt
+                        </div>
+
                         <!-- A div with name class for the name of the card -->
                         <div class="name mm-header-size mm-questions-color">
                             Wieviele Fragen pro Runde willst du stellen?
                         </div>
 
-                        <p class="mm-questions-color">Als Richtlininie: 10 Fragen dauern c.a. 15 Minuten. </p>
+                        <p class="mm-questions-color">Als Richtlinie: 10 Fragen dauern ca. 15 Minuten. Wenn Deine
+                            Freunde Idioten sind und/oder einfach nur langsam, dauert es auch mal 10 Minuten. Wenn Deine
+                            Freunde aber sehr schnelle Idioten sind, dann dauert eine Runde vielleicht auch nur fünf
+                            Minuten. 🤷 </p>
                         <div>
-                            <input type="number" id="questionsInput" min="1" max="10" />
+                            <input type="number" class="mm-input-questions mm-input-text questions" id="questionsInput" min="1" max="10" />
                         </div>
                         <div class="mm-button-container">
                             <a href="#rounds"><button class="mm-button-start">Weiter</button></a>
@@ -63,18 +74,27 @@
                 <div class="card">
                     <div class="card__details">
 
+                        <div class="name">
+                            Musikquiz Maschine 3000
+                        </div>
+
+                        <div class="mm-questions-color mm-step-text">
+                            2. Schritt
+                        </div>
+
                         <!-- A div with name class for the name of the card -->
                         <div class="name mm-header-size mm-rounds-color">
                             Wieviele Runden soll das Quiz gehen?
                         </div>
 
-                        <p class="mm-rounds-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur
-                            sodales morbi dignissim
-                            sed diam
-                            pharetra
-                            vitae ipsum odio.</p>
+                        <p class="mm-rounds-color">Dein Quiz wird [Anzahl der Fragen] Fragen haben. Wähle nun in wie
+                            vielen Runden du diese abfragen willst. Je mehr Runden, desto weniger Fragen pro Runde.
+                            Logisch, ne?
+                            Durch Runden kannst du als ModeratorIn gut Punktezwischenstände, Erholungspausen, Klopausen,
+                            Bierpausen oder sonstigen Nonsense einstreuen.
+                            Button: Musikquiz erstellen</p>
                         <div>
-                            <input type="number" id="roundsInput" min="1" max="10" />
+                            <input type="number" class="mm-input-rounds mm-input-text rounds" id="roundsInput" min="1" max="10" />
                         </div>
                         <div class="mm-button-container">
                             <button id="quiztime" class="mm-button-start" onclick="">Musikquiz erstellen</button>
