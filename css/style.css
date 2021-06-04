@@ -21,7 +21,7 @@ html {
 #container {
   max-width: 90%;
   margin: 30px 20px 30px;
-  overflow:auto;
+  overflow: auto;
 }
 
 @media only screen and (min-width: 1280px) {
@@ -176,14 +176,14 @@ html {
 }
 
 .mm-quiz-summary-number {
-  color: #E9C46A;
-  font-size: larger; 
+  color: #e9c46a;
+  font-size: larger;
   font-weight: 700;
   padding: 0 10px 0 10px;
 }
 
 .mm-quiz-summary-text {
-  font-size: large; 
+  font-size: large;
 }
 
 .mm-quiz-container {
@@ -212,7 +212,7 @@ html {
 
 ol {
   padding: 10px;
-  text-align: center;
+  text-align: left;
   list-style-position: inside;
 }
 
@@ -220,7 +220,6 @@ ol li {
   margin-left: 0;
   margin-bottom: 0.5rem;
 }
-
 
 @media only screen and (min-width: 1280px) {
   .mm-header-size {
