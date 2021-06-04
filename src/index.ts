@@ -80,7 +80,7 @@ async function renderQuiz() {
     const questionsPerRound = parseInt(questionsHtmlInput.value);
     const quizRoundsHtmlInput = document.querySelector("#roundsInput") as HTMLInputElement;
     const quizRounds = parseInt(quizRoundsHtmlInput.value);
-    let quiz:MusikquizResult = {rounds : []};
+    let quiz: MusikquizResult = { rounds: [] };
 
     try {
         quiz = await createQuizData(quizRounds, questionsPerRound)
@@ -89,48 +89,27 @@ async function renderQuiz() {
         return;
     }
 
-
-    /* <div id="round1" class="mm-quiz-round-container">
-                                <div class="mm-quiz-round-container-header">
-                                    Runde 1
-                                </div>
-                                <div class="mm-quiz-round-container-questions">
-                                    <ol>
-                                        <li>BLABLASBLA</li>
-                                        <li>Seulem epsum psum</li>
-                                    </ol>
-                                </div>
-                            </div> */
     const quizGrid = document.querySelector('#quizGrid') as HTMLDivElement;
 
     for (const quizRound of quiz.rounds) {
-        // Round Container
-        const divRoundContainer = document.createElement('div') as HTMLDivElement
-        divRoundContainer.classList.add('mm-quiz-round-container')
+        const roundDetailsElement = document.createElement('details') as HTMLDetailsElement
+        roundDetailsElement.classList.add('mm-quiz-round-container')
 
-        // Header Text
-        const divRoundHeader = document.createElement('div') as HTMLDivElement
-        divRoundHeader.classList.add('mm-quiz-round-container-header')
-        divRoundHeader.innerText = `Runde ${quizRound.roundNumber}`
-
-        // Questions Container
-        const divRoundQuestions = document.createElement('div') as HTMLDivElement
-        divRoundQuestions.classList.add('mm-quiz-round-container-questions')
+        const roundDetailsSummary = document.createElement('summary') as HTMLElement
+        roundDetailsSummary.classList.add('mm-quiz-round-container-header')
+        roundDetailsSummary.innerText = `Runde ${quizRound.roundNumber}`
 
         // Questions list
         const questionList = document.createElement('ol') as HTMLOListElement
 
-        for(const question of quizRound.questions) {
+        for (const question of quizRound.questions) {
             const questionItem = document.createElement('li') as HTMLLIElement
             questionItem.innerText = question.question
             questionList.append(questionItem)
         }
-
-        divRoundContainer.append(divRoundHeader)
-        divRoundContainer.append(divRoundQuestions)
-        divRoundQuestions.append(questionList)
         
-        quizGrid.append(divRoundContainer)
+        roundDetailsElement.append(questionList)
+        quizGrid.append(roundDetailsElement)
     }
 }
 
