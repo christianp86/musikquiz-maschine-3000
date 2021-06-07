@@ -93,5 +93,7 @@ async function renderQuiz() {
         roundDetailsElement.append(questionList)
         quizGrid.append(roundDetailsElement)
     }
+
+    window.location.href = '#quiz';
 }
 
