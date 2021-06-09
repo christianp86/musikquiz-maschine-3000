@@ -1,11 +1,35 @@
 import { Round, MusikquizResult, Question } from './quiz_interfaces'
 
 window.addEventListener('DOMContentLoaded', () => {
+
+    const questionsForm = document.getElementById("questionsForm") as HTMLFormElement
+    questionsForm.addEventListener("submit", (e) => {
+
+        const roundsDescText = document.getElementById("roundsDescText") as HTMLParagraphElement
+        roundsDescText.innerText = roundsDescText.innerText.replace("[Anzahl der Fragen]", "5")
+        window.location.href = "#rounds"
+    })
+
     const generateQuizButton = document.querySelector("#quiztime") as HTMLButtonElement;
     generateQuizButton.addEventListener("click", async () => {
         await renderQuiz()
     });
+
+    const inputElements = document.querySelectorAll('input')
+    for (const inputElement of inputElements) {
+
+    }
 });
+
+/**
+ * 
+ * @param {string} input | Value of HTMLInputElement
+ * @returns {boolean} Is input a valid number
+ */
+function isInputValid(input: string): boolean {
+    const inputNumber = parseInt(input)
+    return inputNumber > 0 ? true : false
+}
 
 
 /**
