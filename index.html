@@ -1,139 +1,167 @@
 <!DOCTYPE html>
 <html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musikquiz Maschine 3000</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Musikquiz Maschine 3000</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/style.css" />
-</head>
-
-<body>
-  <div class="section welcome">
-    <div id="container">
-      <div class="card">
-        <div class="card-details">
-          <div>
-            <span class="card-details-header">Musikquiz</span><br />
-            <span class="card-details-header">Maschine</span>
-            <span class="card-details-header-number">3000</span>
-          </div>
-          <p class="card-details-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Consectetur sodales morbi dignissim sed diam pharetra vitae
-            ipsum odio.
-          </p>
-          <div class="mm-button-container">
-            <a href="#questions"><button class="mm-button-start">Erstellen! Jetzt!</button></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="questions" class="section questions">
-    <div id="container">
-      <div class="card">
-        <div class="card-details">
-          <div class="name">Musikquiz Maschine 3000</div>
-
-          <div class="mm-questions-color mm-step-text">1. Schritt</div>
-
-          <!-- A div with name class for the name of the card -->
-          <div class="name mm-header-size mm-questions-color">
-            Wieviele Fragen pro Runde willst du stellen?
-          </div>
-
-          <p class="card-details-text mm-questions-color">
-            Als Richtlinie: 10 Fragen dauern ca. 15 Minuten. Wenn Deine
-            Freunde Idioten sind und/oder einfach nur langsam, dauert es
-            auch mal 10 Minuten. Wenn Deine Freunde aber sehr schnelle
-            Idioten sind, dann dauert eine Runde vielleicht auch nur fünf
-            Minuten. 🤷
-          </p>
-          <div>
-            <input type="number" class="mm-input-questions mm-input-text questions" id="questionsInput" min="1"
-              max="10" />
-          </div>
-          <div class="mm-button-container">
-            <a href="#rounds"><button class="mm-button-start">Weiter</button></a>
+  <body>
+    <div class="section welcome">
+      <div id="container">
+        <div class="card">
+          <div class="card-details">
+            <div>
+              <span class="card-details-header">Musikquiz</span><br />
+              <span class="card-details-header">Maschine</span>
+              <span class="card-details-header-number">3000</span>
+            </div>
+            <p class="card-details-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Consectetur sodales morbi dignissim sed diam pharetra vitae ipsum
+              odio.
+            </p>
+            <div class="mm-button-container">
+              <a href="#questions"
+                ><button class="mm-button-start">Erstellen! Jetzt!</button></a
+              >
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div id="rounds" class="section rounds">
-    <div id="container">
-      <div class="card">
-        <div class="card-details">
-          <div class="name">Musikquiz Maschine 3000</div>
 
-          <div class="mm-questions-color mm-step-text">2. Schritt</div>
-
-          <div class="name mm-header-size mm-rounds-color">
-            Wieviele Runden soll das Quiz gehen?
-          </div>
-
-          <p class="card-details-text mm-rounds-color">
-            Dein Quiz wird [Anzahl der Fragen] Fragen haben. Wähle nun in
-            wie vielen Runden du diese abfragen willst. Je mehr Runden,
-            desto weniger Fragen pro Runde. Logisch, ne? Durch Runden kannst
-            du als ModeratorIn gut Punktezwischenstände, Erholungspausen,
-            Klopausen, Bierpausen oder sonstigen Nonsense einstreuen.
-          </p>
-          <div>
-            <input type="number" class="mm-input-rounds mm-input-text rounds" id="roundsInput" min="1" max="10" />
-          </div>
-          <div class="mm-button-container">
-            <button id="quiztime" class="mm-button-start" onclick="">
-              Musikquiz erstellen
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="quiz" class="section quiz">
-    <div id="container">
-      <div class="card">
-        <div class="card-details">
-          <div class="mm-quiz">
+    <div id="questions" class="section questions">
+      <div id="container">
+        <div class="card">
+          <div class="card-details">
             <div class="name">Musikquiz Maschine 3000</div>
-            <div class="mm-quiz-color mm-step-text">3. Bäm Bäm Bäm</div>
-            <div class="name mm-header-size mm-quiz-color">
-              Hier ist dein Musikquiz
-            </div>
-            <div id="quizSummary" class="mm-quiz-summary">
+
+            <div class="mm-questions-color mm-step-text">1. Schritt</div>
+
+            <form id="questionsForm">
+              <!-- A div with name class for the name of the card -->
+              <div class="name mm-header-size mm-questions-color">
+                <label for="questions">
+                  Wieviele Fragen pro Runde willst du stellen?
+                  <abbr title="required" aria-label="required">*</abbr></label
+                >
+              </div>
+
+              <p class="card-details-text mm-questions-color">
+                Als Richtlinie: 10 Fragen dauern ca. 15 Minuten. Wenn Deine
+                Freunde Idioten sind und/oder einfach nur langsam, dauert es
+                auch mal 10 Minuten. Wenn Deine Freunde aber sehr schnelle
+                Idioten sind, dann dauert eine Runde vielleicht auch nur fünf
+                Minuten. 🤷
+              </p>
+
               <div>
-                <span class="mm-quiz-summary-number">50</span><span
-                  class="mm-quiz-color mm-quiz-round-container-header">Fragen</span>
+                <input
+                  type="number"
+                  required
+                  class="mm-input-questions mm-input-text questions"
+                  id="questions"
+                  min="1"
+                  max="10"
+                />
               </div>
-              <div class="mm-quiz-color">
-                <span class="mm-quiz-summary-number">10</span><span
-                  class="mm-quiz-color mm-quiz-round-container-header">Runden</span>
+              <div class="mm-button-container">
+                <a href="#rounds"
+                  ><button class="mm-button-start">Weiter</button></a
+                >
               </div>
-              <div class="mm-quiz-color">
-                <span class="mm-quiz-summary-number">~100</span><span
-                  class="mm-quiz-color mm-quiz-round-container-header">Minuten</span>
-              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="rounds" class="section rounds">
+      <div id="container">
+        <div class="card">
+          <div class="card-details">
+            <div class="name">Musikquiz Maschine 3000</div>
+
+            <div class="mm-questions-color mm-step-text">2. Schritt</div>
+
+            <div class="name mm-header-size mm-rounds-color">
+              Wieviele Runden soll das Quiz gehen?
             </div>
-            <div id="quizGrid" class="mm-quiz-container">
-              <!-- The quiz result will be added here -->
+
+            <p id="roundsDescText" class="card-details-text mm-rounds-color">
+              Dein Quiz wird [Anzahl der Fragen] Fragen haben. Wähle nun in wie
+              vielen Runden du diese abfragen willst. Je mehr Runden, desto
+              weniger Fragen pro Runde. Logisch, ne? Durch Runden kannst du als
+              ModeratorIn gut Punktezwischenstände, Erholungspausen, Klopausen,
+              Bierpausen oder sonstigen Nonsense einstreuen.
+            </p>
+            <div>
+              <input
+                type="number"
+                class="mm-input-rounds mm-input-text rounds"
+                id="roundsInput"
+                min="1"
+                max="10"
+              />
             </div>
             <div class="mm-button-container">
-              <button class="mm-button-start">Download</button>
+              <button id="quiztime" class="mm-button-start" onclick="">
+                Musikquiz erstellen
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  </div>
 
-  <script src="./src/index.js"></script>
-</body>
+    <div id="quiz" class="section quiz">
+      <div id="container">
+        <div class="card">
+          <div class="card-details">
+            <div class="mm-quiz">
+              <div class="name">Musikquiz Maschine 3000</div>
+              <div class="mm-quiz-color mm-step-text">3. Bäm Bäm Bäm</div>
+              <div class="name mm-header-size mm-quiz-color">
+                Hier ist dein Musikquiz
+              </div>
+              <div id="quizSummary" class="mm-quiz-summary">
+                <div>
+                  <span class="mm-quiz-summary-number">50</span
+                  ><span class="mm-quiz-color mm-quiz-round-container-header"
+                    >Fragen</span
+                  >
+                </div>
+                <div class="mm-quiz-color">
+                  <span class="mm-quiz-summary-number">10</span
+                  ><span class="mm-quiz-color mm-quiz-round-container-header"
+                    >Runden</span
+                  >
+                </div>
+                <div class="mm-quiz-color">
+                  <span class="mm-quiz-summary-number">~100</span
+                  ><span class="mm-quiz-color mm-quiz-round-container-header"
+                    >Minuten</span
+                  >
+                </div>
+              </div>
+              <div id="quizGrid" class="mm-quiz-container">
+                <!-- The quiz result will be added here -->
+              </div>
+              <div class="mm-button-container">
+                <button class="mm-button-start">Download</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <script src="./src/index.js"></script>
+  </body>
 </html>
