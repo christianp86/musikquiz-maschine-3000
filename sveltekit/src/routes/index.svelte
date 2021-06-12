@@ -1,8 +1,8 @@
 <script>
-	// import Container from '../components/Container.svelte'
-	import Header from '../components/Header.svelte';
-	import MainText from '../components/Maintext.svelte';
-	import Button from '../components/Button.svelte';
+	// import Container from '$lib/Container.svelte'
+	import Header from '$lib/Header.svelte';
+	import MainText from '$lib/Maintext.svelte';
+	import Button from '$lib/Button.svelte';
 
 	const introText =
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur sodales morbi dignissim sed diam pharetra vitae ipsum odio.';
