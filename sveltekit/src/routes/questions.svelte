@@ -1,9 +1,9 @@
 <script>
-	import SmallHeader from '../components/SmallHeader.svelte';
-	import Step from '../components/Step.svelte';
-	import Question from '../components/Question.svelte';
-	import MainText from '../components/Maintext.svelte';
-	import Button from '../components/Button.svelte';
+	import SmallHeader from '$lib/SmallHeader.svelte';
+	import Step from '$lib/Step.svelte';
+	import Question from '$lib/Question.svelte';
+	import MainText from '$lib/Maintext.svelte';
+	import Button from '$lib/Button.svelte';
 	import { numberOfQuestions } from '../stores/inputStore';
 
 	const introText =
