@@ -28,7 +28,7 @@
 		max="10"
 	/>
 </div>
-<a href="quiz"> <Button {buttonText} /></a>
+<a href="quiz?rounds={$numberOfRounds}&questions={$numberOfQuestions}"> <Button {buttonText} /></a>
 
 <style>
 	.rounds {
