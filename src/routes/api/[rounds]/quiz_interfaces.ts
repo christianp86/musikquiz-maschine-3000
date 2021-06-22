@@ -24,4 +24,9 @@ interface MusikquizResult {
     rounds: Round[]
 }
 
-export {Genre, Question, Musikquiz, Round, MusikquizResult}
+interface apiParameter {
+    rounds: number, 
+    questions: number
+}
+
+export type {Genre, Question, Musikquiz, Round, MusikquizResult, apiParameter}
