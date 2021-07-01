@@ -3,7 +3,7 @@
 	import Step from '$lib/Step.svelte';
 	import Question from '$lib/Question.svelte';
 	import MainText from '$lib/Maintext.svelte';
-	import Button from '$lib/Button.svelte';
+	import NavButton from '$lib/NavButton.svelte';
 	import { numberOfQuestions, numberOfRounds } from '../stores/inputStore';
 
 	const question = 'Wieviele Runden soll das Quiz gehen?';
@@ -28,7 +28,8 @@
 		max="10"
 	/>
 </div>
-<a href="quiz?rounds={$numberOfRounds}&questions={$numberOfQuestions}"> <Button {buttonText} /></a>
+
+<NavButton {buttonText} link="quiz?rounds={$numberOfRounds}&questions={$numberOfQuestions}" />
 
 <style>
 	.rounds {
@@ -51,7 +52,7 @@
 		width: 10vw;
 	}
 
-	:global(html) {
+	:global(body) {
 		background-color: #a7acd9;
 	}
 </style>
