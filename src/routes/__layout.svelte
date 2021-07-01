@@ -23,9 +23,7 @@
 	}
 
 	.card {
-		border: 1px solid #bacdd8;
 		padding: 8px;
-		border-radius: 12px;
 		color: white;
 	}
 

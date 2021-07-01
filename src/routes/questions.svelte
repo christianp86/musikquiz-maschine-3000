@@ -3,7 +3,7 @@
 	import Step from '$lib/Step.svelte';
 	import Question from '$lib/Question.svelte';
 	import MainText from '$lib/Maintext.svelte';
-	import Button from '$lib/Button.svelte';
+	import NavButton from '$lib/NavButton.svelte';
 	import { numberOfQuestions } from '../stores/inputStore';
 
 	const introText =
@@ -28,10 +28,11 @@
 		max="10"
 	/>
 </div>
-<a href="rounds"> <Button {buttonText} /></a>
+
+<NavButton {buttonText} link="rounds" />
 
 <style>
-	:global(html) {
+	:global(body) {
 		background-color: #2a9d8f;
 	}
 	.questions-color-text {
