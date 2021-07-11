@@ -1,8 +1,8 @@
-°^°“““<div class="section">
+<div class="section">
 	<div id="container">
 		<div class="card">
 			<div class="card-details">
-				<slot></slot>
+				<slot />
 			</div>
 		</div>
 	</div>
@@ -23,9 +23,7 @@
 	}
 
 	.card {
-		border: 1px solid #bacdd8;
 		padding: 8px;
-		border-radius: 12px;
 		color: white;
 	}
 
