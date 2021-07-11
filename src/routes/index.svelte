@@ -1,11 +1,13 @@
 <script>
-	// import Container from '$lib/Container.svelte'
 	import Header from '$lib/Header.svelte';
+	import Highlights from '$lib/Highlights.svelte';
 	import MainText from '$lib/Maintext.svelte';
-	import Button from '$lib/Button.svelte';
+	import NavButton from '$lib/NavButton.svelte';
 
+	const highlights =
+		'Für Musikquiz-Hosts · für deine Musikquiz-Bedürfnisse · für denkwürdige Quiz-Abende';
 	const introText =
-		'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur sodales morbi dignissim sed diam pharetra vitae ipsum odio.';
+		'Es ist mega einfach. Lege fest wie viele Fragen du pro Runde spielen willst und wie viele Runden das Quiz haben soll. Die phänomenale Musikquiz Maschine 3000 wählt danach für dich zufällig die Quizmaster-Fragen aus uuuuund … Zack, fertig – dein Musikquiz!';
 	const buttonText = 'Erstellen! Jetzt!';
 </script>
 
@@ -14,8 +16,9 @@
 </svelte:head>
 
 <Header />
+<Highlights {highlights} />
 <MainText mainText={introText} />
-<a href="questions"><Button {buttonText} /></a>
+<NavButton {buttonText} link="questions" />
 
 <style>
 	:global(*) {
@@ -24,7 +27,8 @@
 		padding: 0;
 		font-family: 'Open Sans';
 	}
-	:global(html) {
+
+	:global(body) {
 		background-color: #264653ff;
 	}
 </style>
