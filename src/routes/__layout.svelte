@@ -38,7 +38,7 @@
 		}
 
 		#container {
-			max-width: 60%;
+			max-width: 40%;
 			padding-left: 4em;
 		}
 	}
