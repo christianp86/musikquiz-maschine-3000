@@ -4,8 +4,6 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "test": "mocha tests/**/*.spec.ts",
-    "test2": "env TS_NODE_PROJECT=\"tsconfig.testing.json\" mocha tests/**/*.spec.ts",
-    "test3": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha tests/**/*.spec.ts",
     "build": "svelte-kit build",
     "preview": "svelte-kit preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
@@ -35,6 +33,7 @@
   },
   "type": "module",
   "dependencies": {
-    "spotify-web-api-ts": "^1.4.5"
+    "spotify-web-api-ts": "^1.4.5",
+    "svelte-select": "^4.2.7"
   }
 }
