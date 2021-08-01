@@ -29,12 +29,14 @@
 	/>
 </div>
 
-<NavButton {buttonText} link="rounds" />
+<NavButton style="color: #043b35; border-color: #043b35; --backgroundColor: #08776a" link="/" />
+<NavButton {buttonText} next link="rounds" />
 
 <style>
 	:global(body) {
 		background-color: #2a9d8f;
 	}
+
 	.questions-color-text {
 		color: #043b35;
 	}
