@@ -29,7 +29,8 @@
 	/>
 </div>
 
-<NavButton {buttonText} link="quiz?rounds={$numberOfRounds}&questions={$numberOfQuestions}" />
+<NavButton link="questions" style="color: #5d6396; border-color: #5d6396; "/>
+<NavButton {buttonText} next link="quiz?rounds={$numberOfRounds}&questions={$numberOfQuestions}" />
 
 <style>
 	.rounds {

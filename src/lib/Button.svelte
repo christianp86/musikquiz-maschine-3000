@@ -1,12 +1,12 @@
 <script>
 	export let buttonText = 'Text';
+	export let next = false;
 </script>
 
-<button class="button">{buttonText}</button>
+<button class="button" class:next>{buttonText}</button>
 
 <style>
 	.button {
-		background-color: #264653;
 		border: 1px solid #f4a261;
 		border-radius: 4px;
 		font-family: OpenSans-Bold;
@@ -18,5 +18,9 @@
 		margin-top: 5vh;
 		transition-duration: 0.4s;
 		cursor: pointer;
+	}
+
+	.next {
+		background-color: #264653;
 	}
 </style>
