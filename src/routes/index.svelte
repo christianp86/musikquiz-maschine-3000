@@ -13,6 +13,11 @@
 
 <svelte:head>
 	<title>Musikquiz Maschine 3000</title>
+	<style>
+		body {
+			background-color: #264653ff;
+		}
+	</style>
 </svelte:head>
 
 <Header />
@@ -26,9 +31,5 @@
 		margin: 0;
 		padding: 0;
 		font-family: 'Open Sans';
-	}
-
-	:global(.section) {
-		--theme-background: #264653ff;
 	}
 </style>

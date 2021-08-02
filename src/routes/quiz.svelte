@@ -36,6 +36,14 @@
 	const minutes = $numberOfQuestions * QUESTIONDURATION * $numberOfRounds;
 </script>
 
+<svelte:head>
+	<style>
+		body {
+			background-color: #f4a261;
+		}
+	</style>
+</svelte:head>
+
 <div class="quiz">
 	<SmallHeader />
 	<div class="quiz-color-text">
@@ -69,10 +77,6 @@
 </div>
 
 <style>
-	:global(.section) {
-		--theme-background: #f4a261;
-	}
-
 	.quiz {
 		overflow-x: hidden;
 		overflow-y: auto;
