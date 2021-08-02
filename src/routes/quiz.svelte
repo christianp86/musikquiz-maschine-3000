@@ -3,10 +3,10 @@
 	 * @type {import('@sveltejs/kit').Load}
 	 */
 	export async function load({ page, fetch, session, context }) {
-		console.log(`Query: ${page.query}`)
+		console.log(`Query: ${page.query}`);
 
 		const roundsParam = page.query.get('rounds');
-		const questionsParam = page.query.get('questions')
+		const questionsParam = page.query.get('questions');
 		const res = await fetch(`/api/${roundsParam}/${questionsParam}`);
 
 		if (res.ok) return { props: { quiz: await res.json() } };
@@ -22,6 +22,7 @@
 	import SmallHeader from '$lib/SmallHeader.svelte';
 	import Step from '$lib/Step.svelte';
 	import Question from '$lib/Question.svelte';
+	import NavButton from '$lib/NavButton.svelte';
 	import Button from '$lib/Button.svelte';
 	import { numberOfQuestions, numberOfRounds } from '../stores/inputStore';
 	import QuizRound from '$lib/QuizRound.svelte';
@@ -34,6 +35,14 @@
 	const QUESTIONDURATION = 2;
 	const minutes = $numberOfQuestions * QUESTIONDURATION * $numberOfRounds;
 </script>
+
+<svelte:head>
+	<style>
+		body {
+			background-color: #f4a261;
+		}
+	</style>
+</svelte:head>
 
 <div class="quiz">
 	<SmallHeader />
@@ -62,15 +71,12 @@
 				<QuizRound round={quizRound.roundNumber} questions={quizRound.questions} />
 			{/each}
 		</div>
+		<NavButton backToRounds link="/rounds" />
 		<Button {buttonText} />
 	</div>
 </div>
 
 <style>
-	:global(html) {
-		background-color: #f4a261;
-	}
-
 	.quiz {
 		overflow-x: hidden;
 		overflow-y: auto;
