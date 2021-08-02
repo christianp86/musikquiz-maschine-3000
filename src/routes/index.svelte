@@ -28,7 +28,7 @@
 		font-family: 'Open Sans';
 	}
 
-	:global(body) {
-		background-color: #264653ff;
+	:global(.section) {
+		--theme-background: #264653ff;
 	}
 </style>

@@ -2,7 +2,7 @@
 	<div id="container">
 		<div class="card">
 			<div class="card-details">
-				<slot></slot>
+				<slot />
 			</div>
 		</div>
 	</div>
@@ -10,6 +10,7 @@
 
 <style>
 	.section {
+		background-color: var(--theme-background);
 		height: 100vh;
 		display: flex;
 		flex-direction: column;

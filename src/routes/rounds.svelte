@@ -29,10 +29,14 @@
 	/>
 </div>
 
-<NavButton link="questions" style="color: #5d6396; border-color: #5d6396; "/>
+<NavButton link="questions" backToQuestions />
 <NavButton {buttonText} next link="quiz?rounds={$numberOfRounds}&questions={$numberOfQuestions}" />
 
 <style>
+	:global(.section) {
+		--theme-background: #a7acd9;
+	}
+
 	.rounds {
 		background-color: #a7acd9;
 	}
@@ -51,9 +55,5 @@
 		text-align: center;
 		color: #e9c46a;
 		width: 10vw;
-	}
-
-	:global(body) {
-		background-color: #a7acd9;
 	}
 </style>
