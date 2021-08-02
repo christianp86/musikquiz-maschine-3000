@@ -13,12 +13,17 @@
 
 <svelte:head>
 	<title>Musikquiz Maschine 3000</title>
+	<style>
+		body {
+			background-color: #264653ff;
+		}
+	</style>
 </svelte:head>
 
 <Header />
 <Highlights {highlights} />
 <MainText mainText={introText} />
-<NavButton {buttonText} link="questions" />
+<NavButton {buttonText} next link="questions" />
 
 <style>
 	:global(*) {
@@ -26,9 +31,5 @@
 		margin: 0;
 		padding: 0;
 		font-family: 'Open Sans';
-	}
-
-	:global(body) {
-		background-color: #264653ff;
 	}
 </style>

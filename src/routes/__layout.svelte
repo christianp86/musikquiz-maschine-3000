@@ -2,7 +2,7 @@
 	<div id="container">
 		<div class="card">
 			<div class="card-details">
-				<slot></slot>
+				<slot />
 			</div>
 		</div>
 	</div>
@@ -38,7 +38,7 @@
 		}
 
 		#container {
-			max-width: 40%;
+			max-width: 60%;
 			padding-left: 4em;
 		}
 	}
