@@ -13,6 +13,14 @@
 	const buttonText = 'Musikquiz erstellen';
 </script>
 
+<svelte:head>
+	<style>
+		body {
+			background-color: #a7acd9;
+		}
+	</style>
+</svelte:head>
+
 <SmallHeader />
 <div class="rounds-color-text">
 	<Step stepNumber={2} />
@@ -33,10 +41,6 @@
 <NavButton {buttonText} next link="quiz?rounds={$numberOfRounds}&questions={$numberOfQuestions}" />
 
 <style>
-	:global(.section) {
-		--theme-background: #a7acd9;
-	}
-
 	.rounds {
 		background-color: #a7acd9;
 	}

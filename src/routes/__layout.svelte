@@ -10,7 +10,6 @@
 
 <style>
 	.section {
-		background-color: var(--theme-background);
 		height: 100vh;
 		display: flex;
 		flex-direction: column;

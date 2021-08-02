@@ -13,6 +13,14 @@
 	const question = 'Wieviele Fragen pro Runde willst du stellen?';
 </script>
 
+<svelte:head>
+	<style>
+		body {
+			background-color: #2a9d8f;
+		}
+	</style>
+</svelte:head>
+
 <SmallHeader />
 <div class="questions-color-text">
 	<Step />
@@ -33,10 +41,6 @@
 <NavButton {buttonText} next link="rounds" />
 
 <style>
-	:global(.section) {
-		--theme-background: #2a9d8f;
-	}
-
 	.questions-color-text {
 		color: #043b35;
 	}
