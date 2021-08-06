@@ -90,7 +90,6 @@
 		display: grid;
 		justify-content: space-evenly;
 		margin-top: 10px;
-		border: 4px solid #e9c46a;
 	}
 
 	.quiz-summary-number {
@@ -109,7 +108,7 @@
 	.quiz-container {
 		display: grid;
 		/* grid-template-columns: 50% 50%; */
-		justify-content: space-evenly;
+		/* justify-content: space-evenly; */
 		/* margin-top: 5vh; */
 	}
 
@@ -126,8 +125,8 @@
 			font-size: x-large;
 		}
 
-		.quiz-container {
+		/* .quiz-container {
 			grid-template-columns: 50% 50%;
-		}
+		} */
 	}
 </style>
