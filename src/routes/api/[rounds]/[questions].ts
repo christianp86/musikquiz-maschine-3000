@@ -1,4 +1,5 @@
-import type { Round, MusikquizResult, Question, apiParameter } from './quiz_interfaces'
+import type { EndpointOutput } from '@sveltejs/kit';
+import type { Round, MusikquizResult, Question } from '../quiz_interfaces'
 
 import questions from './data/questions.json'
 
@@ -40,7 +41,7 @@ async function createQuizData(rounds: number, questions: number): Promise<Musikq
     for (let index = 1; index <= rounds; index++) {
         const mqRound: Round = { roundNumber: index, questions: [] };
         for (let index = 0; index < questions; index++) {
-            mqRound.questions.push(questionPool[randomInt(0, 18)])
+            mqRound.questions.push(questionPool[randomInt(0, 30)])
         }
         musikQuizResult.rounds.push(mqRound);
     }
@@ -49,14 +50,12 @@ async function createQuizData(rounds: number, questions: number): Promise<Musikq
 }
 
 /**
- * @type {import('@sveltejs/kit').RequestHandler}
+ * 
  */
 export async function get({ params }) {
     console.log(params)
     const musicQuiz = await createQuizData(params.rounds, params.questions)
     return {
-        body: {
-            musicQuiz
-        }
+        body: { musicQuiz }
     };
 }
