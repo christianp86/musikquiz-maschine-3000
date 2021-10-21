@@ -1,5 +1,5 @@
 import type { EndpointOutput } from '@sveltejs/kit';
-import type { Round, MusikquizResult, Question } from '../quiz_interfaces'
+import type { Round, MusikquizResult, Question } from '$util/quiz_interfaces'
 
 import questions from './data/questions.json'
 
