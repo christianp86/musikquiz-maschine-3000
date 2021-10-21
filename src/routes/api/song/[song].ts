@@ -1,5 +1,5 @@
 import type { Request, EndpointOutput } from '@sveltejs/kit';
-import { AuthManager } from '../../../utils/spotify/AuthManager'
+import { AuthManager } from '../../../lib/utils/spotify/AuthManager'
 import { SpotifyWebApi } from 'spotify-web-api-ts';
 
 /**
@@ -21,10 +21,10 @@ export async function get({ params } : Request): Promise<EndpointOutput> {
 		};
 	}
 	const spotify = new SpotifyWebApi({ accessToken: token })
-	const { artist } = params
+	const { song } = params
 
-	const spotifySearchResult = ( artist !== undefined ) 
-		? await spotify.search.search(`"${artist}"`, ['artist'], { market: 'DE' }) 
+	const spotifySearchResult = ( song !== undefined ) 
+		? await spotify.search.search(`"${song}"`, ['track'], { market: 'DE' }) 
 		: "No artist provided";
 
 	return {

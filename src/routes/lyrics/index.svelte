@@ -63,9 +63,14 @@
 	function voiceSelected() {
 		speak();
 	}
+
+	function playLyrics(event) {
+		lyrics = event.detail.lyrics
+		speak()
+	}
 </script>
 
-<FindLyrics />
+<FindLyrics on:lyrics_found={playLyrics} />
 
 <h1>Speech synthesiser</h1>
 

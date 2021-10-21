@@ -1,22 +1,25 @@
-import fs from 'fs';
-import { json2csv } from 'json-2-csv';
-import type { MusikquizResult } from '../../../quiz_interfaces'
+import type { EndpointOutput } from '@sveltejs/kit';
+import type { MusikquizResult } from '$util/quiz_interfaces'
+import { convertJSONtoCSV } from '$lib/utils/MusicQuiz'
 
-function generateCSVFile(musicQuiz: MusikquizResult): void {
-    // 1.  Convert JSON to CSV
-    json2csv(musicQuiz.rounds, (error, csv) => {
-        if (error) {
-            throw error;
+const TESTDATA: MusikquizResult = {
+    rounds: [
+        {
+            roundNumber: 1,
+            questions: [
+                {
+                    id: 1,
+                    question: 'Blablabla'
+                }
+            ]
         }
+    ]
+}
 
-        // print CSV string
-        console.log(csv);
+export async function get(): Promise<EndpointOutput> {
+    const musicQuizCSV = await convertJSONtoCSV(TESTDATA);
 
-        // write CSV to a file
-        fs.writeFileSync('./data/music_quiz.csv', csv);
-    })
-
-    // // 2. Generate file and return it
-    // const writeStream = fs.createWriteStream("./data/musikquiz.csv");
-
+    return {
+        body: musicQuizCSV
+    };
 }
