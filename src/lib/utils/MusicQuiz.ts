@@ -1,4 +1,3 @@
-import jsonexport from 'jsonexport/dist'
 import type { MusikquizResult, Question, Round } from './quiz_interfaces'
 
 /**
@@ -7,11 +6,11 @@ import type { MusikquizResult, Question, Round } from './quiz_interfaces'
  * @returns {string} Music Quiz Rounds as CSV
  */
 export async function convertJSONtoCSV(musicQuiz: MusikquizResult): Promise<string> {
-    const musicQuizCSV = await jsonexport(musicQuiz.rounds)
-        .catch((error) => { throw error })
+    /* const musicQuizCSV = await jsonexport(musicQuiz.rounds)
+        .catch((error) => { throw error }) */
 
-    console.log(musicQuizCSV)
-    return musicQuizCSV
+    //console.log(musicQuizCSV)
+    return ''
 }
 
 export function convertToCSV(musicQuiz: MusikquizResult): string {

@@ -35,7 +35,6 @@
   },
   "type": "module",
   "dependencies": {
-    "jsonexport": "^3.2.0",
     "spotify-web-api-ts": "^1.4.5"
   }
 }
