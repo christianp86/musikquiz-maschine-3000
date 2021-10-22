@@ -12,6 +12,7 @@
     "format": "prettier --write --plugin-search-dir=. ."
   },
   "devDependencies": {
+    "@sveltejs/adapter-netlify": "^1.0.0-next.34",
     "@sveltejs/kit": "^1.0.0-next.180",
     "@types/jest": "^27.0.2",
     "@types/jsonexport": "^3.0.2",
