@@ -7,7 +7,7 @@
 
 		const roundsParam = page.query.get('rounds');
 		const questionsParam = page.query.get('questions');
-		const res = await fetch(`/api/${roundsParam}/${questionsParam}`);
+		const res = await fetch(`/api/quiz/${roundsParam}/${questionsParam}`);
 
 		if (res.ok) return { props: { quiz: await res.json() } };
 
