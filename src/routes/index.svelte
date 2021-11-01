@@ -23,7 +23,7 @@
 <Header />
 <Highlights {highlights} />
 <MainText mainText={introText} />
-<NavButton {buttonText} next link="questions" />
+<NavButton {buttonText} next link="players" />
 
 <style>
 	:global(*) {

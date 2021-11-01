@@ -24,9 +24,19 @@ interface MusikquizResult {
     rounds: Round[]
 }
 
-interface apiParameter {
+interface ApiParameter {
     rounds: number, 
     questions: number
 }
 
-export type {Genre, Question, Musikquiz, Round, MusikquizResult, apiParameter}
+type Player = {
+    name: string,
+    correctQuestions: CorrectAnswer[]
+}
+
+type CorrectAnswer = {
+    round: number,
+    question: number
+}
+
+export type {Genre, Question, Musikquiz, Round, MusikquizResult, ApiParameter as apiParameter, Player, CorrectAnswer}

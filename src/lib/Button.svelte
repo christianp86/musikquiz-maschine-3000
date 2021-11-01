@@ -7,6 +7,7 @@
 
 <style>
 	.button {
+		width: max-content;
 		border: 1px solid #f4a261;
 		border-radius: 4px;
 		font-family: OpenSans-Bold;
@@ -15,7 +16,6 @@
 		text-align: center;
 		line-height: 24px;
 		padding: 12px 24px;
-		margin-top: 5vh;
 		transition-duration: 0.4s;
 		cursor: pointer;
 	}
