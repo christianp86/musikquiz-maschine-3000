@@ -18,22 +18,60 @@
 	}
 </script>
 
-<script>
+<script lang="ts">
+	import type { MusikquizResult, Question as QuestionType } from '$lib/utils/quiz_interfaces';
+
 	import SmallHeader from '$lib/SmallHeader.svelte';
 	import Step from '$lib/Step.svelte';
 	import Question from '$lib/Question.svelte';
 	import NavButton from '$lib/NavButton.svelte';
 	import Button from '$lib/Button.svelte';
-	import { numberOfQuestions, numberOfRounds } from '../stores/inputStore';
-	import QuizRound from '$lib/QuizRound.svelte';
+	import QuizRoundQuestion from '$lib/QuizRoundQuestions.svelte'
 
-	export let quiz = {};
+	import { numberOfQuestions, numberOfRounds } from '../stores/inputStore';
+
+	export let quiz: MusikquizResult;
 	export const rounds = 0;
 
-	const question = 'Hier ist dein Musikquiz';
+	const question = 'Hier ist dein Musikquiz.';
 	const buttonText = 'Download';
 	const QUESTIONDURATION = 2;
 	const minutes = $numberOfQuestions * QUESTIONDURATION * $numberOfRounds;
+
+	let currentRound = 1;
+	let currentRoundIndex = currentRound - 1
+	let currentQuestionNumber = 1;
+	let currentQuestionIndex = currentQuestionNumber - 1
+	let currentQuestion: QuestionType = quiz.rounds[currentRoundIndex].questions[currentQuestionIndex];
+
+	/**
+	 * Determines the next possible round number
+	 * @param roundNumber
+	 */
+	function nextRound(roundNumber): number {
+		return quiz.rounds.length > currentRound ? roundNumber++ : quiz.rounds.length
+	}
+
+	/**
+	 * Determins next possible question number
+	 * In case of last question of a round we need to start a new round with the first question
+	 * @param questionNumber
+	 */
+	function nextQuestion(questionNumber): number {
+		return quiz.rounds[currentRoundIndex].questions.length > currentQuestionNumber ? questionNumber++ : 1
+	}
+
+	/**
+	 * Checks if the Quiz is finished. All questions of each round have been asked
+	 */
+	function isQuizFinished(): boolean {
+		let quizIsFinished = false;
+
+		if (quiz.rounds.length === currentRound && quiz.rounds[currentRoundIndex].questions.length === currentQuestionNumber) {
+			quizIsFinished = true
+		}
+		return quizIsFinished
+	}
 </script>
 
 <svelte:head>
@@ -67,9 +105,7 @@
 			</div>
 		</div>
 		<div id="quizGrid" class="quiz-container">
-			{#each quiz.musicQuiz.rounds as quizRound}
-				<QuizRound round={quizRound.roundNumber} questions={quizRound.questions} />
-			{/each}
+			<QuizRoundQuestion round={currentRound} question={currentQuestion} questionNumber={currentQuestionNumber} />
 		</div>
 		<NavButton backToRounds link="/rounds" />
 		<Button {buttonText} />

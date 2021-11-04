@@ -25,12 +25,12 @@
 	import NavButton from '$lib/NavButton.svelte';
 	import Button from '$lib/Button.svelte';
 	import { numberOfQuestions, numberOfRounds } from '../stores/inputStore';
-	import QuizRound from '$lib/QuizRoundQuestions.svelte';
+	import QuizRound from '$lib/QuizRound.svelte';
 
 	export let quiz = {};
 	export const rounds = 0;
 
-	const question = 'Hier ist dein Musikquiz.';
+	const question = 'Hier ist dein Musikquiz';
 	const buttonText = 'Download';
 	const QUESTIONDURATION = 2;
 	const minutes = $numberOfQuestions * QUESTIONDURATION * $numberOfRounds;
