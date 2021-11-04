@@ -1,24 +1,32 @@
 <script lang="ts">
-	export let round = 1;
-	export let questions = [];
-
+	import type { Question } from '$lib/utils/quiz_interfaces'
 	import type { Player } from '$lib/utils/quiz_interfaces';
 	import { players } from '../stores/player';
-	let allPlayers: Player[] = $players
-	let currentQuestion = questions[0]
+
+	export let round = 1
+	export let question: Question;
+	export let questionNumber = 1;
+
+	let allPlayers: Player[] = $players;
+	
 </script>
 
-<span class="summary-title">Fragen für Runde {round}</span>
+<div class="container">
+	<span class="summary-title">Runde {round}, Frage {questionNumber}</span>
 	<div class="summary-content">
+		<h5>{question.question}</h5>
 		<ol>
 			{#each allPlayers as player}
 				<li>{player.name}</li>
 			{/each}
 		</ol>
 	</div>
-	
+</div>
 
 <style>
+	.container {
+		margin-top: 5%;
+	}
 
 	.summary-title {
 		user-select: none;
@@ -28,10 +36,6 @@
 		font-weight: 300;
 		line-height: 1.5;
 		border-top: 1px solid #e9c46a;
-	}
-
-	svg {
-		display: block;
 	}
 
 	ol {

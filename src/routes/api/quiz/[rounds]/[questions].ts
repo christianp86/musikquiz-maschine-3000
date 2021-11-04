@@ -1,4 +1,4 @@
-import type { EndpointOutput } from '@sveltejs/kit';
+import type { EndpointOutput, Request } from '@sveltejs/kit';
 import type { Round, MusikquizResult, Question } from '$util/quiz_interfaces'
 
 import questions from './data/questions.json'
@@ -52,10 +52,11 @@ async function createQuizData(rounds: number, questions: number): Promise<Musikq
 /**
  * 
  */
-export async function get({ params }) {
+export async function get({ params }: Request ): Promise<EndpointOutput> {
     console.log(params)
-    const musicQuiz = await createQuizData(params.rounds, params.questions)
+    const musicQuiz = await createQuizData(parseInt(params.rounds), parseInt(params.questions))
     return {
-        body: { musicQuiz }
+        status: 200,
+        body: musicQuiz
     };
 }
