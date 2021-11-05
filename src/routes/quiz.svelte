@@ -38,6 +38,7 @@
 	const QUESTIONDURATION = 2;
 
 	let buttonText = NEXT_QUESTION;
+	let buttonDisabled = true;
 	const question = 'Hier ist dein Musikquiz.';
 	const minutes = $numberOfQuestions * QUESTIONDURATION * $numberOfRounds;
 
@@ -76,7 +77,12 @@
 		return quizIsFinished
 	}
 
+	/**
+	 * Get the next question
+	 */
 	function getNextQuestion() {
+		currentQuestionNumber = nextQuestion(currentQuestionNumber)
+
 		// Is quiz finished?
 		if(isQuizFinished()) {
 			buttonText = 'Ergebnis'
@@ -86,14 +92,13 @@
 		// Is round finished?
 		if(currentQuestionNumber === $numberOfQuestions) {
 			buttonText = NEXT_ROUND
-			currentQuestionNumber = nextQuestion(currentQuestionNumber)
 			currentRound = nextRound(currentRound)
 			return
 		}
 
 		// Next question
 		buttonText = NEXT_QUESTION
-		currentQuestionNumber = nextQuestion(currentQuestionNumber)
+		
 	}
 </script>
 
@@ -131,7 +136,7 @@
 			<QuizRoundQuestion round={currentRound} question={currentQuestion} questionNumber={currentQuestionNumber} />
 		</div>
 		<NavButton backToRounds link="/rounds" />
-		<Button {buttonText} on:click={getNextQuestion}/>
+		<Button {buttonText} on:click={getNextQuestion} disabled={buttonDisabled}/>
 	</div>
 </div>
 
