@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Player } from '$lib/utils/quiz_interfaces';
 	import { players } from '../stores/player';
-    import { numberOfPlayers } from '../stores/inputStore'; 
+	import { numberOfPlayers } from '../stores/inputStore';
 	let newPlayer = '';
 	let allPlayers: Player[] = [];
 
@@ -14,7 +14,7 @@
 		allPlayers = [...allPlayers, player];
 		players.set(allPlayers);
 		newPlayer = '';
-        numberOfPlayers.update(n => n + 1)
+		numberOfPlayers.update((n) => n + 1);
 	}
 </script>
 
@@ -28,8 +28,8 @@
 		min="3"
 		max="20"
 	/>
-	<button class="button" on:click="{addPlayer}">+</button>
-    <p>{$numberOfPlayers} Spieler/Teams.</p>
+	<button class="button" on:click={addPlayer}>+</button>
+	<p>{$numberOfPlayers} Spieler/Teams.</p>
 </div>
 
 <style>
@@ -50,19 +50,24 @@
 		font-size: xx-large;
 		text-align: center;
 		color: #e9c46a;
-		width: 10vw;
+		width: 45vw;
 	}
 
-    .button {
+	.button {
 		width: max-content;
 		border: 1px solid #043b35;
 		border-radius: 4px;
 		font-family: OpenSans-Bold;
-        background: inherit;
+		background: inherit;
 		color: #e9c46a;
 		text-align: center;
 		transition-duration: 0.4s;
 		cursor: pointer;
 	}
 
+	@media only screen and (min-width: 1280px) {
+		.input-text {
+			width: 15vw;
+		}
+	}
 </style>

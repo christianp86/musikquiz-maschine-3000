@@ -37,20 +37,4 @@
 	.questions-color-text {
 		color: #043b35;
 	}
-
-	.questions {
-		background: #2a9d8f;
-	}
-
-	.input-questions {
-		border: none;
-		border-bottom: 4px solid #043b35;
-	}
-
-	.input-text {
-		font-size: xx-large;
-		text-align: center;
-		color: #e9c46a;
-		width: 10vw;
-	}
 </style>

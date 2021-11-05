@@ -33,23 +33,26 @@
 	export let quiz: MusikquizResult;
 	export const rounds = 0;
 
-	const question = 'Hier ist dein Musikquiz.';
-	const buttonText = 'Download';
+	const NEXT_QUESTION = 'Nächste Frage'
+	const NEXT_ROUND = 'Nächste Runde'
 	const QUESTIONDURATION = 2;
+
+	let buttonText = NEXT_QUESTION;
+	const question = 'Hier ist dein Musikquiz.';
 	const minutes = $numberOfQuestions * QUESTIONDURATION * $numberOfRounds;
 
 	let currentRound = 1;
-	let currentRoundIndex = currentRound - 1
+	$: currentRoundIndex = currentRound - 1
 	let currentQuestionNumber = 1;
-	let currentQuestionIndex = currentQuestionNumber - 1
-	let currentQuestion: QuestionType = quiz.rounds[currentRoundIndex].questions[currentQuestionIndex];
+	$: currentQuestionIndex = currentQuestionNumber - 1
+	$: currentQuestion = quiz.rounds[currentRoundIndex].questions[currentQuestionIndex];
 
 	/**
 	 * Determines the next possible round number
 	 * @param roundNumber
 	 */
-	function nextRound(roundNumber): number {
-		return quiz.rounds.length > currentRound ? roundNumber++ : quiz.rounds.length
+	function nextRound(roundNumber: number): number {
+		return roundNumber < $numberOfRounds ? roundNumber + 1 : roundNumber
 	}
 
 	/**
@@ -57,8 +60,8 @@
 	 * In case of last question of a round we need to start a new round with the first question
 	 * @param questionNumber
 	 */
-	function nextQuestion(questionNumber): number {
-		return quiz.rounds[currentRoundIndex].questions.length > currentQuestionNumber ? questionNumber++ : 1
+	function nextQuestion(questionNumber: number): number {
+		return currentQuestionNumber < $numberOfQuestions ? questionNumber + 1 : 1
 	}
 
 	/**
@@ -71,6 +74,26 @@
 			quizIsFinished = true
 		}
 		return quizIsFinished
+	}
+
+	function getNextQuestion() {
+		// Is quiz finished?
+		if(isQuizFinished()) {
+			buttonText = 'Ergebnis'
+			return
+		}
+
+		// Is round finished?
+		if(currentQuestionNumber === $numberOfQuestions) {
+			buttonText = NEXT_ROUND
+			currentQuestionNumber = nextQuestion(currentQuestionNumber)
+			currentRound = nextRound(currentRound)
+			return
+		}
+
+		// Next question
+		buttonText = NEXT_QUESTION
+		currentQuestionNumber = nextQuestion(currentQuestionNumber)
 	}
 </script>
 
@@ -108,7 +131,7 @@
 			<QuizRoundQuestion round={currentRound} question={currentQuestion} questionNumber={currentQuestionNumber} />
 		</div>
 		<NavButton backToRounds link="/rounds" />
-		<Button {buttonText} />
+		<Button {buttonText} on:click={getNextQuestion}/>
 	</div>
 </div>
 
