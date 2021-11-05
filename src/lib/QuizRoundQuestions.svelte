@@ -1,25 +1,28 @@
 <script lang="ts">
-	import type { Question } from '$lib/utils/quiz_interfaces'
+	import type { Question } from '$lib/utils/quiz_interfaces';
 	import type { Player } from '$lib/utils/quiz_interfaces';
 	import { players } from '../stores/player';
 
-	export let round = 1
+	export let round = 1;
 	export let question: Question;
 	export let questionNumber = 1;
 
 	let allPlayers: Player[] = $players;
-	
 </script>
 
 <div class="container">
 	<span class="summary-title">Runde {round}, Frage {questionNumber}</span>
 	<div class="summary-content">
-		<h5>{question.question}</h5>
-		<ol>
-			{#each allPlayers as player}
-				<li>{player.name}</li>
-			{/each}
-		</ol>
+		<h4>{question.question}</h4>
+		{#each allPlayers as player}
+			<input
+				type="checkbox"
+				id="player-{player.name}"
+				name="vehicle-{player.name}"
+				value={player.name}
+			/>
+			<label for="vehicle-{player.name}">{player.name}</label>
+		{/each}
 	</div>
 </div>
 
