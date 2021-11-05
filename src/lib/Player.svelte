@@ -31,6 +31,13 @@
 	<button class="button" on:click={addPlayer}>+</button>
 	<p>{$numberOfPlayers} Spieler/Teams.</p>
 </div>
+<div>
+	<ol>
+		{#each allPlayers as player}
+			<li>{player.name}</li>
+		{/each}
+	</ol>
+</div>
 
 <style>
 	div {

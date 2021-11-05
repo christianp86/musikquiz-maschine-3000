@@ -1,9 +1,10 @@
 <script>
 	export let buttonText = 'Text';
 	export let next = false;
+	export let disabled = false;
 </script>
 
-<button class="button" class:next on:click>{buttonText}</button>
+<button class="button" class:next on:click>{buttonText} disabled={disabled}</button>
 
 <style>
 	.button {
