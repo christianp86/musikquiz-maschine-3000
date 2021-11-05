@@ -3,7 +3,7 @@
 	export let next = false;
 </script>
 
-<button class="button" class:next>{buttonText}</button>
+<button class="button" class:next on:click>{buttonText}</button>
 
 <style>
 	.button {
