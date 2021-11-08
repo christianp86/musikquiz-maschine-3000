@@ -36,6 +36,17 @@
 		transition-duration: 0.2s;
 	}
 
+	.navbutton:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+
+	.navbutton:enabled {
+		cursor: pointer;
+	}
+	
+
+
 	.navbutton:hover {
 		background-color: var(--backgroundColor);
 	}

@@ -4,10 +4,11 @@
 	export let disabled = false;
 </script>
 
-<button class="button" class:next on:click>{buttonText} disabled={disabled}</button>
+<button class="button" class:next on:click {disabled}>{buttonText}</button>
 
 <style>
 	.button {
+		background-color: #264653;
 		width: max-content;
 		border: 1px solid #f4a261;
 		border-radius: 4px;
@@ -17,8 +18,17 @@
 		text-align: center;
 		line-height: 24px;
 		padding: 12px 24px;
-		transition-duration: 0.4s;
+	}
+
+	.button:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+
+	.button:enabled {
 		cursor: pointer;
+		color: #f4a261;
+		transition-duration: 0.4s;
 	}
 
 	.next {
