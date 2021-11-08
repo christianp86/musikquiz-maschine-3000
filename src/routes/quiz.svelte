@@ -48,12 +48,13 @@
 	const QUESTIONDURATION = 2;
 	const minutes = $numberOfQuestions * QUESTIONDURATION * $numberOfRounds;
 
-	let buttonText = "";
+	let buttonText = '';
 	let buttonDisabled = true;
 	let currentRound = 1;
 	let currentQuestionNumber = 1;
 	let numberOfSelectedPlayers = 0;
 	let totalQuestionIndex = 0;
+	let showResult = false;
 
 	$: currentRoundIndex = currentRound - 1;
 	$: currentQuestionIndex = currentQuestionNumber - 1;
@@ -83,7 +84,7 @@
 	 * Determines the next possible round number
 	 * @param roundNumber
 	 */
-	function nextRound(roundNumber: number): number {
+	function getNextRoundNumber(roundNumber: number): number {
 		return roundNumber < $numberOfRounds ? roundNumber + 1 : roundNumber;
 	}
 
@@ -92,7 +93,7 @@
 	 * In case of last question of a round we need to start a new round with the first question
 	 * @param questionNumber
 	 */
-	function nextQuestion(questionNumber: number): number {
+	function getNextQuestionNumber(questionNumber: number): number {
 		return currentQuestionNumber < $numberOfQuestions ? questionNumber + 1 : 1;
 	}
 
@@ -100,22 +101,36 @@
 	 * Checks if the Quiz is finished. All questions of each round have been asked
 	 */
 	function isQuizFinished(): boolean {
-		
-		let roundIndex = currentRoundIndex === undefined ? currentRound-1 : currentRoundIndex
-		let quizIsFinished = false;
+		let roundIndex = currentRoundIndex === undefined ? currentRound - 1 : currentRoundIndex;
+		return currentQuestionNumber === $numberOfQuestions && currentRound === $numberOfRounds
+			? true
+			: false;
+	}
 
-		if (
-			quiz.rounds.length === currentRound &&
-			quiz.rounds[roundIndex].questions.length === currentQuestionNumber
-		) {
-			quizIsFinished = true;
+	/**
+	 * Get the next question
+	 */
+	function handleButtonClick() {
+		numberOfSelectedPlayers = 0;
+		totalQuestionIndex += 1;
+		currentQuestionNumber = getNextQuestionNumber(currentQuestionNumber);
+		setCorrectButtonText();
+
+		// Is quiz finished?
+		if (isQuizFinished()) {
+			showResult = true;
+			return;
 		}
-		return quizIsFinished;
+
+		// Is round finished?
+		if (totalQuestionIndex >= $numberOfQuestions && totalQuestionIndex % $numberOfQuestions === 0) {
+			currentRound = getNextRoundNumber(currentRound);
+		}
 	}
 
 	/**
 	 * Updates the button text of <Button> and <NavButton>
-	*/
+	 */
 	function setCorrectButtonText() {
 		// Is quiz finished?
 		if (isQuizFinished()) {
@@ -126,31 +141,11 @@
 		// Is round finished?
 		if (currentQuestionNumber === $numberOfQuestions) {
 			buttonText = ButtonText.NEXT_ROUND;
-			return;
-		}
-
-		buttonText = ButtonText.NEXT_QUESTION;
-	}
-
-	/**
-	 * Get the next question
-	 */
-	function getNextQuestion() {
-		numberOfSelectedPlayers = 0;
-		currentQuestionNumber = nextQuestion(currentQuestionNumber);
-		totalQuestionIndex += 1;
-		setCorrectButtonText()
-
-		// Is quiz finished?
-		if (isQuizFinished()) {
-			return;
-		}
-
-		// Is round finished?
-		if (currentQuestionNumber === $numberOfQuestions) {
-			currentRound = nextRound(currentRound);
+		} else {
+			buttonText = ButtonText.NEXT_QUESTION;
 		}
 	}
+
 	/**
 	 * Handle dispatched message from Component QuizRoundQuestions
 	 * @param {Event} event Component Event
@@ -160,7 +155,7 @@
 	}
 
 	// Set the button text initially
-	setCorrectButtonText()
+	setCorrectButtonText();
 </script>
 
 <svelte:head>
@@ -203,10 +198,10 @@
 			/>
 		</div>
 		<NavButton backToRounds link="/rounds" />
-		{#if isQuizFinished()}
-			<NavButton next {buttonText} link="#" />
+		{#if showResult}
+			<NavButton next {buttonText} link="#" disabled={buttonDisabled} />
 		{:else}
-			<Button {buttonText} on:click={getNextQuestion} disabled={buttonDisabled} />
+			<Button {buttonText} on:click={handleButtonClick} disabled={buttonDisabled} />
 		{/if}
 	</div>
 </div>
