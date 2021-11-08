@@ -161,7 +161,7 @@
 		overflow: auto;
 	}
 
-	.clearfix {
+	/* .clearfix {
 		clear: both;
 	}
 
@@ -182,7 +182,7 @@
 	#pitch {
 		float: right;
 		width: 81%;
-	}
+	} */
 
 	.controls {
 		text-align: center;

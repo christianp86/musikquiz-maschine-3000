@@ -18,26 +18,28 @@
 	}
 </script>
 
-<div>
-	<input
-		type="text"
-		bind:value={newPlayer}
-		required
-		class="input-questions input-text questions"
-		id="newplayer"
-		min="3"
-		max="20"
-	/>
-	<button class="button" on:click={addPlayer}>+</button>
-	<p>{$numberOfPlayers} Spieler/Teams.</p>
-</div>
-<div>
-	<ol>
-		{#each allPlayers as player}
-			<li>{player.name}</li>
-		{/each}
-	</ol>
-</div>
+<form on:submit|preventDefault|stopPropagation={addPlayer}>
+	<div>
+		<input
+			type="text"
+			bind:value={newPlayer}
+			required
+			class="input-questions input-text questions"
+			id="newplayer"
+			min="3"
+			max="20"
+		/>
+		<button class="button" on:click={addPlayer}>+</button>
+		<p>{$numberOfPlayers} Spieler/Teams.</p>
+	</div>
+	<div>
+		<ol>
+			{#each allPlayers as player}
+				<li>{player.name}</li>
+			{/each}
+		</ol>
+	</div>
+</form>
 
 <style>
 	div {

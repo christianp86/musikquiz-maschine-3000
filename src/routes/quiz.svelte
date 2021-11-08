@@ -1,4 +1,9 @@
-<script context="module">
+<script context="module" lang="ts">
+	enum ButtonText {
+		NEXT_QUESTION = 'Nächste Frage',
+		NEXT_ROUND = 'Nächste Runde',
+		RESULT = 'Ergebnis'
+	}
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
@@ -19,41 +24,67 @@
 </script>
 
 <script lang="ts">
-	import type { MusikquizResult, Question as QuestionType } from '$lib/utils/quiz_interfaces';
+	import type {
+		MusikquizResult,
+		Question as QuestionType,
+		Player
+	} from '$lib/utils/quiz_interfaces';
 
 	import SmallHeader from '$lib/SmallHeader.svelte';
 	import Step from '$lib/Step.svelte';
 	import Question from '$lib/Question.svelte';
 	import NavButton from '$lib/NavButton.svelte';
 	import Button from '$lib/Button.svelte';
-	import QuizRoundQuestion from '$lib/QuizRoundQuestions.svelte'
+	import QuizRoundQuestion from '$lib/QuizRoundQuestions.svelte';
 
 	import { numberOfQuestions, numberOfRounds } from '../stores/inputStore';
+	import { players } from '../stores/player';
+	const allPlayers: Player[] = $players;
 
 	export let quiz: MusikquizResult;
 	export const rounds = 0;
 
-	const NEXT_QUESTION = 'Nächste Frage'
-	const NEXT_ROUND = 'Nächste Runde'
-	const QUESTIONDURATION = 2;
-
-	let buttonText = NEXT_QUESTION;
-	let buttonDisabled = true;
 	const question = 'Hier ist dein Musikquiz.';
+	const QUESTIONDURATION = 2;
 	const minutes = $numberOfQuestions * QUESTIONDURATION * $numberOfRounds;
 
+	let buttonText = "";
+	let buttonDisabled = true;
 	let currentRound = 1;
-	$: currentRoundIndex = currentRound - 1
 	let currentQuestionNumber = 1;
-	$: currentQuestionIndex = currentQuestionNumber - 1
+	let numberOfSelectedPlayers = 0;
+	let totalQuestionIndex = 0;
+
+	$: currentRoundIndex = currentRound - 1;
+	$: currentQuestionIndex = currentQuestionNumber - 1;
 	$: currentQuestion = quiz.rounds[currentRoundIndex].questions[currentQuestionIndex];
+	$: if (numberOfSelectedPlayers > 0) {
+		buttonDisabled = false;
+	} else {
+		buttonDisabled = true;
+	}
+
+	// Setup all questions
+	for (const player of allPlayers) {
+		// Empty the current player's answers
+		player.correctQuestions = [];
+		for (let roundIndex = 0; roundIndex < $numberOfRounds; roundIndex++) {
+			for (let questionIndex = 0; questionIndex < $numberOfQuestions; questionIndex++) {
+				player.correctQuestions.push({
+					round: roundIndex + 1,
+					question: questionIndex + 1,
+					correct: false
+				});
+			}
+		}
+	}
 
 	/**
 	 * Determines the next possible round number
 	 * @param roundNumber
 	 */
 	function nextRound(roundNumber: number): number {
-		return roundNumber < $numberOfRounds ? roundNumber + 1 : roundNumber
+		return roundNumber < $numberOfRounds ? roundNumber + 1 : roundNumber;
 	}
 
 	/**
@@ -62,44 +93,74 @@
 	 * @param questionNumber
 	 */
 	function nextQuestion(questionNumber: number): number {
-		return currentQuestionNumber < $numberOfQuestions ? questionNumber + 1 : 1
+		return currentQuestionNumber < $numberOfQuestions ? questionNumber + 1 : 1;
 	}
 
 	/**
 	 * Checks if the Quiz is finished. All questions of each round have been asked
 	 */
 	function isQuizFinished(): boolean {
+		
+		let roundIndex = currentRoundIndex === undefined ? currentRound-1 : currentRoundIndex
 		let quizIsFinished = false;
 
-		if (quiz.rounds.length === currentRound && quiz.rounds[currentRoundIndex].questions.length === currentQuestionNumber) {
-			quizIsFinished = true
+		if (
+			quiz.rounds.length === currentRound &&
+			quiz.rounds[roundIndex].questions.length === currentQuestionNumber
+		) {
+			quizIsFinished = true;
 		}
-		return quizIsFinished
+		return quizIsFinished;
+	}
+
+	/**
+	 * Updates the button text of <Button> and <NavButton>
+	*/
+	function setCorrectButtonText() {
+		// Is quiz finished?
+		if (isQuizFinished()) {
+			buttonText = ButtonText.RESULT;
+			return;
+		}
+
+		// Is round finished?
+		if (currentQuestionNumber === $numberOfQuestions) {
+			buttonText = ButtonText.NEXT_ROUND;
+			return;
+		}
+
+		buttonText = ButtonText.NEXT_QUESTION;
 	}
 
 	/**
 	 * Get the next question
 	 */
 	function getNextQuestion() {
-		currentQuestionNumber = nextQuestion(currentQuestionNumber)
+		numberOfSelectedPlayers = 0;
+		currentQuestionNumber = nextQuestion(currentQuestionNumber);
+		totalQuestionIndex += 1;
+		setCorrectButtonText()
 
 		// Is quiz finished?
-		if(isQuizFinished()) {
-			buttonText = 'Ergebnis'
-			return
+		if (isQuizFinished()) {
+			return;
 		}
 
 		// Is round finished?
-		if(currentQuestionNumber === $numberOfQuestions) {
-			buttonText = NEXT_ROUND
-			currentRound = nextRound(currentRound)
-			return
+		if (currentQuestionNumber === $numberOfQuestions) {
+			currentRound = nextRound(currentRound);
 		}
-
-		// Next question
-		buttonText = NEXT_QUESTION
-		
 	}
+	/**
+	 * Handle dispatched message from Component QuizRoundQuestions
+	 * @param {Event} event Component Event
+	 */
+	function handleMessage(event) {
+		numberOfSelectedPlayers = event.detail.numberOfSelectedPlayers;
+	}
+
+	// Set the button text initially
+	setCorrectButtonText()
 </script>
 
 <svelte:head>
@@ -133,10 +194,20 @@
 			</div>
 		</div>
 		<div id="quizGrid" class="quiz-container">
-			<QuizRoundQuestion round={currentRound} question={currentQuestion} questionNumber={currentQuestionNumber} />
+			<QuizRoundQuestion
+				round={currentRound}
+				question={currentQuestion}
+				questionNumber={currentQuestionNumber}
+				{totalQuestionIndex}
+				on:message={handleMessage}
+			/>
 		</div>
 		<NavButton backToRounds link="/rounds" />
-		<Button {buttonText} on:click={getNextQuestion} disabled={buttonDisabled}/>
+		{#if isQuizFinished()}
+			<NavButton next {buttonText} link="#" />
+		{:else}
+			<Button {buttonText} on:click={getNextQuestion} disabled={buttonDisabled} />
+		{/if}
 	</div>
 </div>
 

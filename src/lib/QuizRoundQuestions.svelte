@@ -1,34 +1,55 @@
+<script context="module" lang="ts">
+	enum PlayerInputAction {
+		Added = 1,
+		Removed = -1
+	}
+
+	export type PlayerInput = {
+		playerName: string;
+		checked: boolean;
+	};
+</script>
+
 <script lang="ts">
-	import type { Question } from '$lib/utils/quiz_interfaces';
-	import type { Player } from '$lib/utils/quiz_interfaces';
+	import type { Question, Player } from '$lib/utils/quiz_interfaces';
 
 	import { createEventDispatcher } from 'svelte';
 
 	import { players } from '../stores/player';
+	const allPlayers: Player[] = $players;
 
-	const dispatch = createEventDispatcher();
 	export let round = 1;
-	export let question: Question;
 	export let questionNumber = 1;
+	export let question: Question;
+	export let totalQuestionIndex = 0;
 
-	let allPlayers: Player[] = $players;
+	let numberOfSelectedPlayers = 0;
+	const dispatch = createEventDispatcher();
+	
+	$: dispatch('message', { numberOfSelectedPlayers: numberOfSelectedPlayers });
 
-	function onPlayerInput(
-		event: Event & { currentTarget: EventTarget & HTMLInputElement; }
-	): void {
+	/** Handes player checkbox input changes
+	 * @param {Event} event Change event from input
+	 */
+	function onPlayerInput(event: Event & { currentTarget: EventTarget & HTMLInputElement }): void {
 		event.cancelBubble;
 
-		const clickedPlayer = event.currentTarget.value;
+		const playerInput: PlayerInput = {
+			playerName: event.currentTarget.value,
+			checked: event.currentTarget.checked
+		};
 
-		// Player selected or unselected
-		dispatch('playerInput', {
-			player: clickedPlayer,
-			marked: event.currentTarget.checked
-		});
+		numberOfSelectedPlayers += updatePlayerCorrectAnswer(playerInput);
+	}
 
+	/** Updates the correct answer of the player
+	 * @param {PlayerInput} playerInput Player input
+	 * @returns {number} Number of selected players
+	 */
+	function updatePlayerCorrectAnswer(playerInput: PlayerInput): PlayerInputAction {
 		// Check if player had already been selected and awarded points
-		if (!event.currentTarget.checked) {
-			const foundPlayer = allPlayers.find((player) => player.name === clickedPlayer);
+		if (!playerInput.checked) {
+			const foundPlayer = allPlayers.find((player) => player.name === playerInput.playerName);
 			if (foundPlayer === undefined) return;
 
 			const questionIndex = foundPlayer.correctQuestions.findIndex(
@@ -36,15 +57,22 @@
 			);
 			if (questionIndex === -1) return;
 
-			foundPlayer.correctQuestions.splice(questionIndex, 1);
+			foundPlayer.correctQuestions[questionIndex].correct = false;
+			return PlayerInputAction.Removed;
 		}
 
 		// Add correct answer to player
-		if (event.currentTarget.checked) {
-			const foundPlayer = allPlayers.find((player) => player.name === clickedPlayer);
+		if (playerInput.checked) {
+			const foundPlayer = allPlayers.find((player) => player.name === playerInput.playerName);
 			if (foundPlayer === undefined) return;
 
-			foundPlayer.correctQuestions.push({ question: questionNumber, round: round });
+			const questionIndex = foundPlayer.correctQuestions.findIndex(
+				(question) => question.question === questionNumber && question.round === round
+			);
+			if (questionIndex === -1) return;
+
+			foundPlayer.correctQuestions[questionIndex].correct = true;
+			return PlayerInputAction.Added;
 		}
 	}
 </script>
@@ -57,11 +85,12 @@
 			<input
 				type="checkbox"
 				id="player-{player.name}"
-				name="vehicle-{player.name}"
+				name="player-{player.name}"
 				value={player.name}
+				bind:checked={player.correctQuestions[totalQuestionIndex].correct}
 				on:change={onPlayerInput}
 			/>
-			<label for="vehicle-{player.name}">{player.name}</label>
+			<label for="player-{player.name}">{player.name}</label>
 		{/each}
 	</div>
 </div>
