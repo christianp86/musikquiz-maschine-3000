@@ -19,29 +19,36 @@
 </script>
 
 <form on:submit|preventDefault|stopPropagation={addPlayer}>
-	<div>
-		<input
-			type="text"
-			bind:value={newPlayer}
-			required
-			class="input-questions input-text questions"
-			id="newplayer"
-			min="3"
-			max="20"
-		/>
-		<button class="button" on:click={addPlayer}>+</button>
-		<p>{$numberOfPlayers} Spieler/Teams.</p>
-	</div>
-	<div>
-		<ol>
-			{#each allPlayers as player}
-				<li>{player.name}</li>
-			{/each}
-		</ol>
+	<div class="container">
+		<div>
+			<input
+				type="text"
+				bind:value={newPlayer}
+				required
+				class="input-questions input-text questions"
+				id="newplayer"
+				min="3"
+				max="20"
+			/>
+			<button on:click={addPlayer}>+</button>
+		</div>
+		<div class="container">
+			<ol>
+				{#each allPlayers as player}
+					<li>{player.name}</li>
+				{/each}
+			</ol>
+		</div>
 	</div>
 </form>
 
 <style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: left;
+		justify-content: center;
+	}
 	div {
 		display: flex;
 		flex-direction: row;
@@ -57,21 +64,22 @@
 
 	.input-text {
 		font-size: xx-large;
-		text-align: center;
+		text-align: left;
 		color: #e9c46a;
 		width: 45vw;
 	}
 
-	.button {
+	button {
 		width: max-content;
-		border: 1px solid #043b35;
-		border-radius: 4px;
+		border: none;
 		font-family: OpenSans-Bold;
+		font-size: xx-large;
 		background: inherit;
 		color: #e9c46a;
 		text-align: center;
-		transition-duration: 0.4s;
 		cursor: pointer;
+		padding-left: 0.5vw;
+		padding-right: 0.5vw;
 	}
 
 	@media only screen and (min-width: 1280px) {
