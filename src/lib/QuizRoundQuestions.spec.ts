@@ -17,11 +17,19 @@ beforeAll(() => {
     const allPlayers: Player[] = [
         {
             name: 'Player 1',
-            correctQuestions: []
+            correctQuestions: [{
+                question: 1,
+                round: 1,
+                correct: false
+            }]
         },
         {
             name: 'Player 2',
-            correctQuestions: []
+            correctQuestions: [{
+                question: 1,
+                round: 1,
+                correct: false
+            }]
         }
     ]
     players.set(allPlayers)
@@ -35,7 +43,7 @@ describe("QuizRoundQuestions Component Tests", () =>
         const { getByText, queryAllByRole } = render(QuizRoundQuestions, { round: 1, questionNumber: 1, question: currentQuestion })
 
         expect(getByText('Runde 1, Frage 1')).toBeInTheDocument()
-        expect(getByText('What is the capital of France?')).toBeInTheDocument()
-        expect(queryAllByRole('input')).toHaveLength(2)
+        expect(getByText(currentQuestion.question)).toBeInTheDocument()
+        expect(queryAllByRole('checkbox')).toHaveLength(2)
     })
 )
