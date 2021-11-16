@@ -46,7 +46,7 @@
 	.container {
 		display: flex;
 		flex-direction: column;
-		align-items: left;
+		align-items: flex-start;
 		justify-content: center;
 	}
 	div {
@@ -54,7 +54,7 @@
 		flex-direction: row;
 	}
 	.questions {
-		background: #2a9d8f;
+		background: none;
 	}
 
 	.input-questions {
@@ -65,7 +65,7 @@
 	.input-text {
 		font-size: xx-large;
 		text-align: left;
-		color: #e9c46a;
+		color: #000000;
 		width: 45vw;
 	}
 
@@ -75,7 +75,7 @@
 		font-family: OpenSans-Bold;
 		font-size: xx-large;
 		background: inherit;
-		color: #e9c46a;
+		color: #000000;
 		text-align: center;
 		cursor: pointer;
 		padding-left: 0.5vw;

@@ -31,7 +31,8 @@ interface ApiParameter {
 
 type Player = {
     name: string,
-    correctQuestions: CorrectAnswer[]
+    correctQuestions: CorrectAnswer[],
+    score: number
 }
 
 type CorrectAnswer = {

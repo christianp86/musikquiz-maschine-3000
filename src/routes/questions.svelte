@@ -37,7 +37,7 @@
 	/>
 </div>
 
-<NavButton backToStart link="players" />
+<NavButton backToStart link="/" />
 <NavButton {buttonText} next link="rounds" />
 
 <style>

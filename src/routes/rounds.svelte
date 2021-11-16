@@ -10,13 +10,13 @@
 
 	const introText = `Dein Quiz wird ${$numberOfQuestions} Fragen haben. Wähle nun in wie vielen Runden du diese abfragen willst. Je mehr Runden, desto weniger Fragen pro Runde. Logisch, ne? Durch Runden kannst du als ModeratorIn gut Punktezwischenstände, Erholungspausen, Klopausen, Bierpausen oder sonstigen Nonsense einstreuen.`;
 
-	const buttonText = 'Musikquiz erstellen';
+	const buttonText = 'Weiter';
 </script>
 
 <svelte:head>
 	<style>
 		body {
-			background-color: #a7acd9;
+			background-color: #e9c46a;
 		}
 	</style>
 </svelte:head>
@@ -38,11 +38,11 @@
 </div>
 
 <NavButton link="questions" backToQuestions />
-<NavButton {buttonText} next link="quiz?rounds={$numberOfRounds}&questions={$numberOfQuestions}" />
+<NavButton {buttonText} next link="players" />
 
 <style>
 	.rounds {
-		background-color: #a7acd9;
+		background-color: #e9c46a;
 	}
 
 	.input-rounds {
@@ -51,13 +51,13 @@
 	}
 
 	.rounds-color-text {
-		color: #5d6396;
+		color: #000000;
 	}
 
 	.input-text {
 		font-size: xx-large;
 		text-align: center;
-		color: #e9c46a;
+		color: #000000;
 		width: 10vw;
 	}
 </style>

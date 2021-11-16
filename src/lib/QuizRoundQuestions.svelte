@@ -58,6 +58,7 @@
 			if (questionIndex === -1) return;
 
 			foundPlayer.correctQuestions[questionIndex].correct = false;
+			foundPlayer.score -= 1;
 			return PlayerInputAction.Removed;
 		}
 
@@ -72,6 +73,7 @@
 			if (questionIndex === -1) return;
 
 			foundPlayer.correctQuestions[questionIndex].correct = true;
+			foundPlayer.score += 1;
 			return PlayerInputAction.Added;
 		}
 	}
