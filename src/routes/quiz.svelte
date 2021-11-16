@@ -68,6 +68,7 @@
 	// Setup all questions
 	for (const player of allPlayers) {
 		// Empty the current player's answers
+		player.score = 0;
 		player.correctQuestions = [];
 		for (let roundIndex = 0; roundIndex < $numberOfRounds; roundIndex++) {
 			for (let questionIndex = 0; questionIndex < $numberOfQuestions; questionIndex++) {
@@ -161,7 +162,7 @@
 <svelte:head>
 	<style>
 		body {
-			background-color: #f4a261;
+			background-color: #e76f51;
 		}
 	</style>
 </svelte:head>
@@ -169,7 +170,7 @@
 <div class="quiz">
 	<SmallHeader />
 	<div class="quiz-color-text">
-		<Step stepNumber={3} />
+		<Step stepNumber={4} />
 		<Question {question} />
 		<div class="quiz-summary">
 			<div>
@@ -199,7 +200,7 @@
 		</div>
 		<NavButton backToRounds link="/rounds" />
 		{#if showResult}
-			<NavButton next {buttonText} link="#" disabled={buttonDisabled} />
+			<NavButton next {buttonText} link="result" disabled={buttonDisabled} />
 		{:else}
 			<Button {buttonText} on:click={handleButtonClick} disabled={buttonDisabled} />
 		{/if}

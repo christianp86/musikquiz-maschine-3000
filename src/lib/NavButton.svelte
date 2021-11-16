@@ -65,12 +65,12 @@
 	}
 
 	.back-to-questions {
-		color: #5d6396;
-		border-color: #5d6396;
+		color: #000000;
+		border-color: #000000;
 	}
 
 	.back-to-questions:hover {
-		background-color: #c9cde8;
+		background-color: #9e9eaa;
 	}
 
 	.back-to-rounds {
