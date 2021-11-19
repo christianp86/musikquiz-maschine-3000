@@ -5,16 +5,23 @@
 	export let backToStart = false;
 	export let backToQuestions = false;
 	export let backToRounds = false;
+	export let disabled = false;
 </script>
 
-<a
-	class="navbutton"
-	class:next
-	class:back-to-start={backToStart}
-	class:back-to-questions={backToQuestions}
-	class:back-to-rounds={backToRounds}
-	href={link}>{buttonText}</a
->
+{#if disabled}
+	<span class="navbutton" class:next>
+		{buttonText}
+	</span>
+{:else}
+	<a
+		class="navbutton"
+		class:next
+		class:back-to-start={backToStart}
+		class:back-to-questions={backToQuestions}
+		class:back-to-rounds={backToRounds}
+		href={link}>{buttonText}</a
+	>
+{/if}
 
 <style>
 	.navbutton {
@@ -58,12 +65,12 @@
 	}
 
 	.back-to-questions {
-		color: #5d6396;
-		border-color: #5d6396;
+		color: #000000;
+		border-color: #000000;
 	}
 
 	.back-to-questions:hover {
-		background-color: #c9cde8;
+		background-color: #9e9eaa;
 	}
 
 	.back-to-rounds {

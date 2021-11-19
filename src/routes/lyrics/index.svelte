@@ -63,9 +63,14 @@
 	function voiceSelected() {
 		speak();
 	}
+
+	function playLyrics(event) {
+		lyrics = event.detail.lyrics
+		speak()
+	}
 </script>
 
-<FindLyrics />
+<FindLyrics on:lyrics_found={playLyrics} />
 
 <h1>Speech synthesiser</h1>
 
@@ -156,7 +161,7 @@
 		overflow: auto;
 	}
 
-	.clearfix {
+	/* .clearfix {
 		clear: both;
 	}
 
@@ -177,7 +182,7 @@
 	#pitch {
 		float: right;
 		width: 81%;
-	}
+	} */
 
 	.controls {
 		text-align: center;

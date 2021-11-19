@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "svelte-kit dev",
-    "test": "mocha tests/**/*.spec.ts",
+    "test": "jest",
     "build": "svelte-kit build",
     "preview": "svelte-kit preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
@@ -12,8 +12,12 @@
     "format": "prettier --write --plugin-search-dir=. ."
   },
   "devDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.124",
-    "@types/jest": "^26.0.24",
+    "@sveltejs/adapter-netlify": "^1.0.0-next.34",
+    "@sveltejs/kit": "^1.0.0-next.180",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/svelte": "^3.0.3",
+    "@types/jest": "^27.0.2",
+    "@types/jsonexport": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
     "dotenv": "^10.0.0",
@@ -25,6 +29,8 @@
     "prettier-plugin-svelte": "^2.3.1",
     "svelte": "^3.38.3",
     "svelte-check": "^2.2.2",
+    "svelte-feather-icons": "^3.5.0",
+    "svelte-jester": "^2.1.5",
     "svelte-preprocess": "^4.7.4",
     "ts-jest": "^27.0.3",
     "ts-node": "^10.1.0",
@@ -33,7 +39,6 @@
   },
   "type": "module",
   "dependencies": {
-    "spotify-web-api-ts": "^1.4.5",
-    "svelte-select": "^4.2.7"
+    "spotify-web-api-ts": "^1.4.5"
   }
 }
