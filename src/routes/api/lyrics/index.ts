@@ -1,6 +1,6 @@
 import type { Request, EndpointOutput } from '@sveltejs/kit';
 
-const API_KEY = '9a8444fc2a1ffa6174e922364446121e'
+const API_KEY = import.meta.env.VITE_MUSIXMATCH_API_KEY as string
 const MUSIXMATCH_URL = 'https://api.musixmatch.com/ws/1.1/matcher.lyrics.get'
 
 /**
