@@ -1,6 +1,6 @@
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'jsdom',
+  // testEnvironment: 'jsdom',
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   transform: {
     "^.+\\.svelte$": [
