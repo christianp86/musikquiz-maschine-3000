@@ -7,22 +7,20 @@
 
   const { session } = getStores();
 
-  supabase.auth.onAuthStateChange(async (event, _session) => {
-    if (event !== "SIGNED_OUT") {
-      session.set({ user: _session.user });
-      await setAuthCookie(_session);
-      goto(ROUTE_QUIZ);
-    } else {
-      session.set({ user: { guest: true } });
-      supabase.auth.signOut();
-      await unsetAuthCookie();
-      goto(ROUTE_HOME);
-    }
-  });
+  async function logout() {
+    console.log("logout");
+    const { error } = await supabase.auth.signOut()
+  }
 </script>
 
 <div class="container">
   <header>
+    <span class="title">Musikquiz Maschine 3000</span>
+    <nav>
+      <ul>
+        <li on:click={logout}>Logout</li>
+      </ul>
+    </nav>
     <slot name="header" />
   </header>
 
@@ -36,13 +34,41 @@
 </div>
 
 <style>
- .container{
-   min-height: 100vh;
-   display: flex;
+  .container {
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
- }
+  }
 
- main {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+    background-color: var(--header-color);
+  }
+
+  .title {
+    flex-grow: 1;
+  }
+
+  nav {
+    flex-grow: 0;
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  li {
+    margin-left: 1rem;
+  }
+
+  main {
     flex: 1;
- }
+    margin: 0 10%;
+  }
 </style>

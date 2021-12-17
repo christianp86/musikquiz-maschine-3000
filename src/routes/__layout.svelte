@@ -14,6 +14,7 @@
       await setAuthCookie(_session);
       goto(ROUTE_QUIZ);
     } else {
+      console.log("signed out");
       session.set({ user: { guest: true } });
       supabase.auth.signOut();
       await unsetAuthCookie();

@@ -1,6 +1,7 @@
 :root {
   --primary-color: rgb(38, 70, 83);
   --secondary-color: rgb(233, 196, 106);
+  --header-color: rgb(45, 83, 98);
 
 
   color: var(--secondary-color, white);
