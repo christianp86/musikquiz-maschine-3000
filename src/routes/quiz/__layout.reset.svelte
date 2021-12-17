@@ -1,5 +1,4 @@
 <script lang="ts">
-  import '../global.css';
   import { supabase } from "$lib/utils/supabase";
   import { setAuthCookie, unsetAuthCookie } from "$lib/utils/session";
   import { ROUTE_HOME, ROUTE_QUIZ } from "$lib/constants";

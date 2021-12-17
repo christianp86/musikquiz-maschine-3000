@@ -37,7 +37,8 @@
 </script>
 
 {#if hasProviders}
-  <span class="heading">{view == 'sign_up' ? 'Sign up' : 'Sign in'} with</span>
+  <h2>Welcome</h2>
+  <span class="heading">Sign in to Musikquiz Maschine 3000.</span>
 
   <div class="providers" class:horizontal={socialLayout == 'horizontal'}>
     {#each providers as provider}
@@ -53,12 +54,16 @@
 {/if}
 
 <style>
+
+  *{
+    text-align: center;
+  }
   .providers {
+    margin-top: 0.2rem;
     display: flex;
     flex-direction: column;
     gap: 5px;
   }
-
   .providers.horizontal {
     flex-direction: row;
   }
@@ -69,4 +74,5 @@
     line-height: 1.25rem;
     margin: 0 0 0.5rem 0;
   }
+
 </style>
