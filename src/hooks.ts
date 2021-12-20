@@ -1,23 +1,13 @@
-import { auth, supabase } from '$lib/utils/supabase';
+import { auth } from '$lib/utils/supabaseClient';
 import { toExpressRequest, toExpressResponse, toSvelteKitResponse } from '$lib/utils/expresify';
 
+/** @type {import('@sveltejs/kit').Handle} */
 export const handle = async ({ request, resolve }) => {
     // Converts request to have `req.headers.cookie` on `req.cookies, as `getUserByCookie` expects parsed cookies on `req.cookies`
     const expressStyleRequest = toExpressRequest(request);
     const { user } = await auth.api.getUserByCookie(expressStyleRequest);
 
-    request.locals.token = expressStyleRequest.cookies['sb:token'] || undefined;
     request.locals.user = user || { guest: true };
-
-    // if we have a token, set the client to use it so we can make authorized requests to Supabase
-    if (request.locals.token) {
-        supabase.auth.setAuth(request.locals.token);
-    }
-
-    // TODO https://github.com/sveltejs/kit/issues/1046
-    if (request.query.has('_method')) {
-        request.method = request.query.get('_method').toUpperCase();
-    }
 
     let response = await resolve(request);
 
@@ -30,10 +20,10 @@ export const handle = async ({ request, resolve }) => {
     return response;
 };
 
+/** @type {import('@sveltejs/kit').GetSession} */
 export async function getSession(request) {
-    const { user, token } = request.locals;
+    const { user } = request.locals;
     return {
-        user,
-        token
+        user
     };
 }

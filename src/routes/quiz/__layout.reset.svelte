@@ -1,14 +1,12 @@
 <script lang="ts">
-  import { supabase } from "$lib/utils/supabase";
-  import { setAuthCookie, unsetAuthCookie } from "$lib/utils/session";
-  import { ROUTE_HOME, ROUTE_QUIZ } from "$lib/constants";
-  import { getStores } from "$app/stores";
-  import { goto } from "$app/navigation";
+  import { supabase } from "$lib/utils/supabaseClient";
 
-  const { session } = getStores();
 
+  /**
+   * Logout user from supabase
+   */
   async function logout() {
-    console.log("logout");
+    console.log("logout"); 
     const { error } = await supabase.auth.signOut()
   }
 </script>
@@ -18,7 +16,7 @@
     <span class="title">Musikquiz Maschine 3000</span>
     <nav>
       <ul>
-        <li on:click={logout}>Logout</li>
+        <li class="text-clickable" on:click={logout}>Logout</li>
       </ul>
     </nav>
     <slot name="header" />

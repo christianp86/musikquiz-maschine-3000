@@ -28,8 +28,7 @@
   async function handleProviderSignIn(provider) {
     loading = true
 
-    const { session, user, error: signInError } = await supabaseClient.auth.signIn({ provider })
-    console.log(`Session: ${session}, User: ${user}`)
+    const { error: signInError } = await supabaseClient.auth.signIn({ provider })
     if (signInError) error = signInError.message
 
     loading = false

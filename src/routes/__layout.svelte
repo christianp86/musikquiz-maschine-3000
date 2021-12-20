@@ -1,6 +1,6 @@
 <script lang="ts">
-  import '../global.css';
-  import { supabase } from "$lib/utils/supabase";
+  import "../global.css";
+  import { supabase } from "$lib/utils/supabaseClient";
   import { setAuthCookie, unsetAuthCookie } from "$lib/utils/session";
   import { ROUTE_HOME, ROUTE_QUIZ } from "$lib/constants";
   import { getStores } from "$app/stores";
@@ -10,13 +10,12 @@
 
   supabase.auth.onAuthStateChange(async (event, _session) => {
     if (event !== "SIGNED_OUT") {
+      import.meta.env["VITE_SPOTIFY_TOKEN"] = _session.provider_token;
       session.set({ user: _session.user });
       await setAuthCookie(_session);
       goto(ROUTE_QUIZ);
     } else {
-      console.log("signed out");
       session.set({ user: { guest: true } });
-      supabase.auth.signOut();
       await unsetAuthCookie();
       goto(ROUTE_HOME);
     }
@@ -38,13 +37,13 @@
 </div>
 
 <style>
- .container{
-   min-height: 100vh;
-   display: flex;
+  .container {
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
- }
+  }
 
- main {
+  main {
     flex: 1;
- }
+  }
 </style>
