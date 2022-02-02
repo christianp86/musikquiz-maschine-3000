@@ -2,18 +2,18 @@ import { auth } from '$lib/utils/supabaseClient';
 import { toExpressRequest, toExpressResponse, toSvelteKitResponse } from '$lib/utils/expresify';
 
 /** @type {import('@sveltejs/kit').Handle} */
-export const handle = async ({ request, resolve }) => {
+export const handle = async ({ event, resolve }) => {
     // Converts request to have `req.headers.cookie` on `req.cookies, as `getUserByCookie` expects parsed cookies on `req.cookies`
-    const expressStyleRequest = toExpressRequest(request);
+    const expressStyleRequest = toExpressRequest(event);
     const { user } = await auth.api.getUserByCookie(expressStyleRequest);
 
-    request.locals.user = user || { guest: true };
+    event.locals.user = user || { guest: true };
 
-    let response = await resolve(request);
+    let response = await resolve(event);
 
     // if auth request - set cookie in response headers
-    if (request.method == 'POST' && request.path === '/api/auth.json') {
-        auth.api.setAuthCookie(request, toExpressResponse(response));
+    if (event.request.method == 'POST' && event.request.path === '/api/auth.json') {
+        auth.api.setAuthCookie(event, toExpressResponse(response));
         response = toSvelteKitResponse(response);
     }
 

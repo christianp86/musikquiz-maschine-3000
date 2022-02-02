@@ -3,13 +3,13 @@ import * as cookie from 'cookie';
 /**
  * Converts a SvelteKit request to a Express compatible request.
  * Supabase expects the cookies to be parsed.
- * @param {SvelteKit.Request} req
+ * @param {SvelteKit.Request} event
  * @returns Express.Request
  */
-export function toExpressRequest(req) {
+export function toExpressRequest(event) {
     return {
-        ...req,
-        cookies: cookie.parse(req.headers.cookie || '')
+        ...event,
+        cookies: cookie.parse(event.request.headers.cookie || '')
     };
 }
 
