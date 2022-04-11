@@ -1,13 +1,15 @@
+import * as cookie from 'cookie';
 import { auth } from '$lib/utils/supabaseClient';
 import { toExpressRequest, toExpressResponse, toSvelteKitResponse } from '$lib/utils/expresify';
 
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = async ({ event, resolve }) => {
-    // Converts request to have `req.headers.cookie` on `req.cookies, as `getUserByCookie` expects parsed cookies on `req.cookies`
-    const expressStyleRequest = toExpressRequest(event);
-    const { user } = await auth.api.getUserByCookie(expressStyleRequest);
 
-    event.locals.user = user || { guest: true };
+    let cookies = cookie.parse(event.request.headers.get('cookie') ?? '')
+    const { user, error } = await auth.api.getUser(cookies.access_token);
+    console.log(error ?? "No error")
+
+    event.locals.user = user ?? { guest: true };
 
     let response = await resolve(event);
 
@@ -21,9 +23,18 @@ export const handle = async ({ event, resolve }) => {
 };
 
 /** @type {import('@sveltejs/kit').GetSession} */
-export async function getSession(request) {
-    const { user } = request.locals;
-    return {
-        user
-    };
+export function getSession(event) {
+    return event.locals
+    /*     return event.locals.user
+            ? {
+                user: {
+                    // only include properties needed client-side —
+                    // exclude anything else attached to the user
+                    // like access tokens etc
+                    name: event.locals.user.name,
+                    email: event.locals.user.email,
+                    avatar: event.locals.user.avatar
+                }
+            }
+            : {}; */
 }

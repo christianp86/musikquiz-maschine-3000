@@ -9,15 +9,19 @@
   const { session } = getStores();
 
   supabase.auth.onAuthStateChange(async (event, _session) => {
-    if (event !== "SIGNED_OUT") {
-      import.meta.env["VITE_SPOTIFY_TOKEN"] = _session.provider_token;
-      session.set({ user: _session.user });
-      await setAuthCookie(_session);
-      goto(ROUTE_QUIZ);
-    } else {
-      session.set({ user: { guest: true } });
-      await unsetAuthCookie();
-      goto(ROUTE_HOME);
+    switch (event) {
+      case "SIGNED_IN":
+        import.meta.env["VITE_SPOTIFY_TOKEN"] = _session.provider_token;
+        session.set({ user: _session.user });
+        await setAuthCookie(_session);
+        goto(ROUTE_QUIZ);
+        break;
+
+      default:
+        session.set({ user: { guest: true } });
+        await unsetAuthCookie();
+        goto(ROUTE_HOME);
+        break;
     }
   });
 </script>

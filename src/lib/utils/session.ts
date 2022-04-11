@@ -9,6 +9,7 @@ import type {
  * @param @type {Session} session Supabase Auth Session 
  */
 export async function setServerSession(event: AuthChangeEvent, session: Session): Promise<void> {
+    console.log(event)
     await fetch('/api/auth.json', {
         method: 'POST',
         headers: new Headers({ 'Content-Type': 'application/json' }),

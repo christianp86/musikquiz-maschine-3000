@@ -2,11 +2,14 @@ import { supabase } from "$lib/utils/supabaseClient";
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export const get = async (request) => {
-    const { data, error } = await supabase.from("musikquiz").select();
+    supabase.auth.user.toString()
+    const { data, error } = await supabase.from("musikquiz").select("title");
     if (error)
         console.error(error);
 
-    return data;
+    return {
+        body: { data }
+    };
 };
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
