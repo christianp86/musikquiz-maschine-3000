@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ fetch }) {
+  export async function load({ fetch, session}) {
     const request = await fetch("/api/quiz.json", {
       method: "GET",
       credentials: "same-origin",
@@ -11,6 +11,7 @@
 
     return {
       props: {
+        session: session,
         quiz: data
       },
     };
@@ -26,8 +27,9 @@
 </script>
 
 <script lang="ts">
-  import { session } from "$app/stores";
   import { supabase } from "$lib/utils/supabaseClient";
+
+  export let session
 
   const getQuizViaClient = async () => {
     const { data, error } = await supabase.from("musikquiz").select();
@@ -35,8 +37,7 @@
     console.log(data);
   };
 
-  //console.log("SESSION");
-  //console.log(session); // { user: { … } }
+  console.log(session); // { user: { … } }
 </script>
 
 <h1>Welcome to Musikquiz Maschine 3000</h1>
