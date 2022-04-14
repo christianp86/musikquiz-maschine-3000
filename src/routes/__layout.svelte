@@ -3,13 +3,16 @@
   import { supabase } from "$lib/utils/supabaseClient";
   import { setAuthCookie, unsetAuthCookie } from "$lib/utils/session";
   import { ROUTE_HOME, ROUTE_QUIZ } from "$lib/constants";
-  import { session } from "$app/stores";
+  import { getStores } from "$app/stores";
   import { goto } from "$app/navigation";
+
+  const { session } = getStores();
 
   supabase.auth.onAuthStateChange(async (event, _session) => {
     switch (event) {
       case "SIGNED_IN":
-        //session.set({ user: _session.user });
+        //import.meta.env["VITE_SPOTIFY_TOKEN"] = _session.provider_token;
+        session.set({ user: _session.user });
         await setAuthCookie(_session);
         goto(ROUTE_QUIZ);
         break;
