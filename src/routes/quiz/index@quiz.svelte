@@ -1,23 +1,20 @@
 <script context="module" lang="ts">
   /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ session }) {
-    if (!session?.user?.id) {
-      return {
-        status: 301,
-        redirect: "/?redirect=/quiz",
-      };
-    }
+  export async function load({ fetch }) {
+    const request = await fetch("/api/quiz.json", {
+      method: "GET",
+      credentials: "same-origin",
+    });
+
+    const data = await request.json();
+    console.log(data);
 
     return {
       props: {
-        session: session,
+        quiz: data
       },
     };
   }
-</script>
-
-<script lang="ts">
-  import { supabase } from "$lib/utils/supabaseClient";
 
   const createQuiz = async () => {
     await fetch("/api/quiz.json", {
@@ -26,22 +23,20 @@
       credentials: "same-origin",
     });
   };
+</script>
 
-  const getQuiz = async () => {
+<script lang="ts">
+  import { session } from "$app/stores";
+  import { supabase } from "$lib/utils/supabaseClient";
+
+  const getQuizViaClient = async () => {
     const { data, error } = await supabase.from("musikquiz").select();
     if (error) console.error(error);
-
     console.log(data);
-    /* const request = await fetch("/api/quiz.json", {
-      method: "GET",
-      credentials: "same-origin",
-    });
-
-    const data = await request.json();
-    console.log(data); */
   };
 
-  getQuiz();
+  //console.log("SESSION");
+  //console.log(session); // { user: { … } }
 </script>
 
 <h1>Welcome to Musikquiz Maschine 3000</h1>

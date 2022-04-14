@@ -1,5 +1,5 @@
 import type { RequestHandlerOutput } from "@sveltejs/kit"
-import type { cookie as myCookie } from "$routes/api/auth.json.js"
+import type { cookie as myCookie } from "$routes/api/auth/index.json.js"
 import { PlaylistManager } from "$lib/utils/spotify/PlaylistManager.js";
 
 import type {
@@ -13,10 +13,8 @@ const FIDI_UND_BUMSI_PLAYLIST_ID = "37i9dQZF1DX11WWTNSp4Dq";
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export const get = async (event): Promise<RequestHandlerOutput> => {
-    console.log(`Enviroment Spotify Token: ${import.meta.env.VITE_SPOTIFY_TOKEN}`);
     let cookies: myCookie = cookie.parse(event.request.headers.get('cookie') ?? '')
-
-    const token = cookies.provider_token ?? import.meta.env.VITE_SPOTIFY_TOKEN as string;
+    const token = cookies.provider_token ?? "NO_TOKEN";
     console.log(`Spotify token: ${token}`);
 
     const playlistManager = new PlaylistManager(token);
