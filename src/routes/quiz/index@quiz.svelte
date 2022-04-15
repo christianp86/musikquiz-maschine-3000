@@ -1,21 +1,35 @@
 <script context="module" lang="ts">
   /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ fetch, session}) {
-    const request = await fetch("/api/quiz.json", {
+  export async function load({ fetch, session }) {
+
+    const response = await fetch("/api/spotify.json", {
+      method: "GET",
+      credentials: "same-origin",
+    });
+
+    const data = await response.json();
+    const playLists = data?.items;
+    console.log(playLists[0].name);
+
+
+
+   /*  const request = await fetch("/api/quiz.json", {
       method: "GET",
       credentials: "same-origin",
     });
 
     const data = await request.json();
-    console.log(data);
+    console.log(data); */
 
     return {
       props: {
         session: session,
-        quiz: data
+        playLists: playLists,
       },
     };
   }
+
+  
 
   const createQuiz = async () => {
     await fetch("/api/quiz.json", {
@@ -27,9 +41,11 @@
 </script>
 
 <script lang="ts">
+  import PlaylistSelector from "$lib/components/PlaylistSelector.svelte";
   import { supabase } from "$lib/utils/supabaseClient";
 
-  export let session
+  export let session;
+  export let playLists;
 
   const getQuizViaClient = async () => {
     const { data, error } = await supabase.from("musikquiz").select();
@@ -37,7 +53,9 @@
     console.log(data);
   };
 
-  console.log(session); // { user: { … } }
+  //console.log(session); // { user: { … } }
 </script>
 
 <h1>Welcome to Musikquiz Maschine 3000</h1>
+
+<PlaylistSelector {playLists}/>

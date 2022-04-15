@@ -58,4 +58,17 @@ export class PlaylistManager {
 
     return pagingPlaylistTracks;
   }
+
+  async getMyPlayLists(): Promise<any> {
+    const url = 'https://api.spotify.com/v1/me/playlists';
+
+    const response = await fetch(url, {
+      headers: {
+        "Authorization": `Bearer ${this.token}`,
+      },
+    });
+
+    const myPlaylists = await response.json();
+    return myPlaylists
+  }
 }

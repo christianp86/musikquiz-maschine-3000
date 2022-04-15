@@ -27,13 +27,15 @@ export const get = async (event): Promise<RequestHandlerOutput> => {
         },
     };
 
-    const tracks = await playlistManager.getTracks(
-        FIDI_UND_BUMSI_PLAYLIST_ID,
-        pagingOptions,
-    );
+    /*     const tracks = await playlistManager.getTracks(
+            FIDI_UND_BUMSI_PLAYLIST_ID,
+            pagingOptions,
+        ); */
+
+    const playlists = await playlistManager.getMyPlayLists();
 
     return {
         status: 200,
-        body: JSON.stringify(tracks)
+        body: JSON.stringify(playlists)
     }
 }
