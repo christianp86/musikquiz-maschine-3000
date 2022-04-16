@@ -85,11 +85,11 @@ export interface PlaylistTrackType {
      * but needs to be made since the tracks types vary in the Full and Simplified versions.
      */
 export interface PlaylistBaseObject {
-  collaborative: boolean;
+  id: string;
+  href: string;
   images: Image[];
   name: string;
   type: "playlist";
-  uri: string;
 }
 
 /**

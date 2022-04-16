@@ -11,7 +11,10 @@
 
 <script lang="ts">
   import { supabase } from "$lib/utils/supabaseClient";
+  import type { User } from "@supabase/gotrue-js//dist/main/lib/types";
   export let session
+
+  const user: User = session?.user;
 
   /**
    * Logout user from supabase
@@ -38,7 +41,7 @@
   </main>
 
   <footer>
-    <p>{session?.user?.user_metadata?.full_name}</p>
+    <p>{user?.user_metadata?.full_name}</p>
   </footer>
 </div>
 
