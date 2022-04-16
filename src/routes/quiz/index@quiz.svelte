@@ -1,6 +1,9 @@
 <script context="module" lang="ts">
   /** @type {import('@sveltejs/kit').Load} */
   export async function load({ fetch, session }) {
+    console.log("LOAD");
+
+    if (session === null) return;
 
     const response = await fetch("/api/spotify.json", {
       method: "GET",
@@ -11,9 +14,7 @@
     const playLists = data?.items;
     console.log(playLists[0].name);
 
-
-
-   /*  const request = await fetch("/api/quiz.json", {
+    /*  const request = await fetch("/api/quiz.json", {
       method: "GET",
       credentials: "same-origin",
     });
@@ -28,8 +29,6 @@
       },
     };
   }
-
-  
 
   const createQuiz = async () => {
     await fetch("/api/quiz.json", {
@@ -58,4 +57,4 @@
 
 <h1>Welcome to Musikquiz Maschine 3000</h1>
 
-<PlaylistSelector {playLists}/>
+<PlaylistSelector {playLists} />

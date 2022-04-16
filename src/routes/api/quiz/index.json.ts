@@ -1,4 +1,4 @@
-import type { cookie as myCookie } from "$routes/api/auth/index.json.js"
+import type { Cookie as myCookie } from "$routes/api/auth/index.json.js"
 
 import * as cookie from 'cookie';
 import { supabase } from "$lib/utils/supabaseClient";

@@ -1,11 +1,13 @@
-export type cookie = {
+
+import type { Session } from '@supabase/gotrue-js/dist/main/lib/types';
+import type { RequestHandlerOutput } from '@sveltejs/kit'
+
+export type Cookie = {
     refresh_token: string,
     access_token: string,
     provider_token: string,
     expires_at: string
 }
-
-import type { RequestHandlerOutput } from '@sveltejs/kit'
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function post({ request }): Promise<RequestHandlerOutput> {
@@ -19,7 +21,7 @@ export async function post({ request }): Promise<RequestHandlerOutput> {
     } = constructCookies(body.session)
 
     return {
-        status: 302,
+        status: 200,
         body: 'success',
         headers: {
             'set-cookie': [
@@ -27,13 +29,24 @@ export async function post({ request }): Promise<RequestHandlerOutput> {
                 access_token,
                 provider_token,
                 expires_at
-            ],
-            location: '/quiz'
+            ]
         }
     }
 }
 
-const constructCookies = (session): cookie => {
+const constructCookies = (session): Cookie => {
+    // in case user signs out
+    if (session === null) {
+        session = {
+            refresh_token: "deleted",
+            access_token: "deleted",
+            provider_token: "deleted",
+            expires_at: 0,
+            token_type: undefined,
+            user: undefined
+        } 
+    }
+
     let cookieOptions = `Path=/;HttpOnly;Secure;SameSite=Strict;Expires=${new Date(session.expires_at * 1000).toUTCString()};`
 
     return {

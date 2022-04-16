@@ -11,7 +11,6 @@
   supabase.auth.onAuthStateChange(async (event, _session) => {
     switch (event) {
       case "SIGNED_IN":
-        //import.meta.env["VITE_SPOTIFY_TOKEN"] = _session.provider_token;
         session.set({ user: _session.user });
         await setAuthCookie(_session);
         goto(ROUTE_QUIZ);

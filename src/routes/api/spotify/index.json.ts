@@ -1,5 +1,5 @@
 import type { RequestHandlerOutput } from "@sveltejs/kit"
-import type { cookie as myCookie } from "$routes/api/auth/index.json.js"
+import type { Cookie as myCookie } from "$routes/api/auth/index.json.js"
 import { PlaylistManager } from "$lib/utils/spotify/PlaylistManager.js";
 
 import type {
