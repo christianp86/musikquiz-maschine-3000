@@ -12,7 +12,7 @@
     switch (event) {
       case "SIGNED_IN":
         session.set({ user: _session.user });
-        await setAuthCookie(_session);
+        await setAuthCookie(event, _session);
         goto(ROUTE_QUIZ);
         break;
 

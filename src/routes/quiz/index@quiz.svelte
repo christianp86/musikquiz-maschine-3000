@@ -1,8 +1,6 @@
 <script context="module" lang="ts">
   /** @type {import('@sveltejs/kit').Load} */
   export async function load({ fetch, session }) {
-    console.log("LOAD");
-
     if (session === null) return;
 
     const response = await fetch("/api/spotify.json", {
@@ -24,7 +22,7 @@
 
     return {
       props: {
-        session: session,
+        // session: session,
         playLists: playLists,
       },
     };
@@ -43,7 +41,6 @@
   import PlaylistSelector from "$lib/components/PlaylistSelector.svelte";
   import { supabase } from "$lib/utils/supabaseClient";
 
-  export let session;
   export let playLists;
 
   const getQuizViaClient = async () => {

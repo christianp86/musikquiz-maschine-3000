@@ -1,13 +1,24 @@
+<script context="module" lang="ts">
+  /** @type {import('@sveltejs/kit').Load} */
+  export async function load({ session }) {
+    return {
+      props: {
+        session: session,
+      },
+    };
+  }
+</script>
+
 <script lang="ts">
   import { supabase } from "$lib/utils/supabaseClient";
-
+  export let session
 
   /**
    * Logout user from supabase
    */
   async function logout() {
-    console.log("logout"); 
-    const { error } = await supabase.auth.signOut()
+    console.log("logout");
+    const { error } = await supabase.auth.signOut();
   }
 </script>
 
@@ -27,7 +38,7 @@
   </main>
 
   <footer>
-    <slot name="footer" />
+    <p>{session?.user?.user_metadata?.full_name}</p>
   </footer>
 </div>
 

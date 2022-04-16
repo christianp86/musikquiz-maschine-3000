@@ -17,5 +17,5 @@ export async function setServerSession(event: AuthChangeEvent, session: Session)
     });
 }
 
-export const setAuthCookie = async (session) => await setServerSession('SIGNED_IN', session);
+export const setAuthCookie = async (event: AuthChangeEvent, session: Session) => await setServerSession(event, session);
 export const unsetAuthCookie = async () => await setServerSession('SIGNED_OUT', null);
