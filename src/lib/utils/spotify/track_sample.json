@@ -1,0 +1,78 @@
+{
+    "album": {
+        "album_type": "album",
+        "artists": [
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0O98jlCaPzvsoei6U5jfEL"
+                },
+                "href": "https://api.spotify.com/v1/artists/0O98jlCaPzvsoei6U5jfEL",
+                "id": "0O98jlCaPzvsoei6U5jfEL",
+                "name": "Damon Albarn",
+                "type": "artist",
+                "uri": "spotify:artist:0O98jlCaPzvsoei6U5jfEL"
+            }
+        ],
+        "external_urls": {
+            "spotify": "https://open.spotify.com/album/6GPFSYXLhTPSPG3c8nuGxv"
+        },
+        "href": "https://api.spotify.com/v1/albums/6GPFSYXLhTPSPG3c8nuGxv",
+        "id": "6GPFSYXLhTPSPG3c8nuGxv",
+        "images": [
+            {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b27344631ea1b06912c98a475ad2",
+                "width": 640
+            },
+            {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e0244631ea1b06912c98a475ad2",
+                "width": 300
+            },
+            {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d0000485144631ea1b06912c98a475ad2",
+                "width": 64
+            }
+        ],
+        "name": "The Nearer The Fountain, More Pure The Stream Flows",
+        "release_date": "2021-11-12",
+        "release_date_precision": "day",
+        "total_tracks": 11,
+        "type": "album",
+        "uri": "spotify:album:6GPFSYXLhTPSPG3c8nuGxv"
+    },
+    "artists": [
+        {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0O98jlCaPzvsoei6U5jfEL"
+            },
+            "href": "https://api.spotify.com/v1/artists/0O98jlCaPzvsoei6U5jfEL",
+            "id": "0O98jlCaPzvsoei6U5jfEL",
+            "name": "Damon Albarn",
+            "type": "artist",
+            "uri": "spotify:artist:0O98jlCaPzvsoei6U5jfEL"
+        }
+    ],
+    "disc_number": 1,
+    "duration_ms": 300120,
+    "episode": false,
+    "explicit": false,
+    "external_ids": {
+        "isrc": "GBKZV2100077"
+    },
+    "external_urls": {
+        "spotify": "https://open.spotify.com/track/4P8ec5yOtF2INU3qaWIO6E"
+    },
+    "href": "https://api.spotify.com/v1/tracks/4P8ec5yOtF2INU3qaWIO6E",
+    "id": "4P8ec5yOtF2INU3qaWIO6E",
+    "is_local": false,
+    "is_playable": true,
+    "name": "The Nearer The Fountain, More Pure The Stream Flows",
+    "popularity": 45,
+    "preview_url": "https://p.scdn.co/mp3-preview/0fba1315e234ab107120d62fb6508617231c41cc?cid=12f0a78d539f40568612b5cca2ef1e7e",
+    "track": true,
+    "track_number": 1,
+    "type": "track",
+    "uri": "spotify:track:4P8ec5yOtF2INU3qaWIO6E"
+}

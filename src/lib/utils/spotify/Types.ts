@@ -53,17 +53,18 @@ export interface Image {
 /**
  * Track type
  */
- export interface Track {
-  track: {
-    album: {
-      name: string;
-      artist: {
-        name: string;
-      };
-    };
+export type Track = {
+  album: {
     name: string;
+    artist: {
+      name: string;
+    };
   };
-}
+  id: string;
+  href: string;
+  name: string;
+  preview_url: string;
+};
 
 /**
  * Playlist Track
@@ -76,7 +77,7 @@ export interface PlaylistTrackType {
 /**
  * Playlist Track Object
  */
- export interface PlaylistTracks {
+export interface PlaylistTracks {
   items: PlaylistTrackType[];
 }
 
