@@ -59,6 +59,7 @@ export type Track = {
     artist: {
       name: string;
     };
+    images: Image[];
   };
   id: string;
   href: string;

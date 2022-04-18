@@ -9,6 +9,7 @@
       artist: {
         name: track_sample.album.artists[0].name,
       },
+      images: track_sample.album.images,
     },
     href: track_sample.href,
     id: track_sample.id,
