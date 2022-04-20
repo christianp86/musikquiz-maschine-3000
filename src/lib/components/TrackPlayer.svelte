@@ -6,6 +6,7 @@
   }
 
   import type { Track } from "$lib/utils/spotify/Types";
+  import Speech from "./Speech.svelte";
   export let track: Track;
 
   let playbackSettings: PlaybackSettings = PlaybackSettings.Song;
@@ -27,22 +28,20 @@
   <div class="play_controls">
     {#if playbackSettings === PlaybackSettings.Song}
       <div class="audio_controls">
-        <figure>
-          <figcaption>
-            Listen to {track.album.artist.name} - {track.name}
-          </figcaption>
-          <audio controls src={track.preview_url}>
-            Your browser does not support the
-            <code>audio</code> element.
-          </audio>
-        </figure>
+        <audio controls src={track.preview_url}>
+          Your browser does not support the
+          <code>audio</code> element.
+        </audio>
       </div>
     {/if}
   </div>
   {#if playbackSettings === PlaybackSettings.Lyrics || playbackSettings === PlaybackSettings.Translate}
     <div class="speech_controls">
+      <Speech />
       {#if playbackSettings === PlaybackSettings.Translate}
-        <div class="translate_controls" />
+        <div class="translate_controls">
+          <p>Hier sind die Translate Controls</p>
+        </div>
       {/if}
     </div>
   {/if}
@@ -84,8 +83,8 @@
   }
 
   .info {
-      display: flex;
-      flex-direction: row;
+    display: flex;
+    flex-direction: row;
   }
 
   .picture {

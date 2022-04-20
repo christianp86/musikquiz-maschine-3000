@@ -31,7 +31,7 @@
 
     const { error: signInError } = await supabaseClient.auth.signIn(
       { provider },
-      { scopes: "playlist-read-private" }
+      { scopes: "playlist-read-private playlist-read-collaborative" }
     );
     if (signInError) error = signInError.message;
 
