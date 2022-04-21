@@ -37,7 +37,7 @@
   </div>
   {#if playbackSettings === PlaybackSettings.Lyrics || playbackSettings === PlaybackSettings.Translate}
     <div class="speech_controls">
-      <Speech />
+      <Speech artist={track.album.artist.name} trackName={track.name} />
       {#if playbackSettings === PlaybackSettings.Translate}
         <div class="translate_controls">
           <p>Hier sind die Translate Controls</p>

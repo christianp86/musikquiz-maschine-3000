@@ -10,6 +10,10 @@
       credentials: "same-origin",
     });
 
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
+
     const data = await response.json();
     const playLists: PlaylistBaseObject[] = data?.items.map(
       (spotifyPlaylist): PlaylistBaseObject => ({
@@ -50,14 +54,13 @@
   import PlaylistSelector from "$lib/components/PlaylistSelector.svelte";
   import { supabase } from "$lib/utils/supabaseClient";
 
-  export let playLists:PlaylistBaseObject[];
+  export let playLists: PlaylistBaseObject[];
 
   const getQuizViaClient = async () => {
     const { data, error } = await supabase.from("musikquiz").select();
     if (error) console.error(error);
     console.log(data);
   };
-
 </script>
 
 <h1>Welcome to Musikquiz Maschine 3000</h1>

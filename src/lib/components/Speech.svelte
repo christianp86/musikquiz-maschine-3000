@@ -1,6 +1,26 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   const synth = window.speechSynthesis;
-  let selected = "";
+
+  export let artist: string;
+  export let trackName: string;
+
+  let lyrics = "";
+
+  onMount(async () => {
+    const urlParameter = new URLSearchParams();
+    urlParameter.append("artist", encodeURI(artist));
+    urlParameter.append("track", trackName);
+    const apiUrl = `/api/lyrics?${urlParameter.toString()}`;
+
+    const request = await fetch(apiUrl);
+    if (request.ok) {
+      lyrics = await request.json();
+    }
+  });
+
+  let selectedVoice = "";
   let pitch = 1;
   let rate = 1;
 
@@ -18,7 +38,7 @@
 
   const speak = (text: string): void => {
     if (synth.speaking) {
-      console.error("speechSynthesis.speaking");
+      console.error("Already speaking");
       return;
     }
 
@@ -29,16 +49,7 @@
 
     let utterThis = new SpeechSynthesisUtterance(text);
 
-    for (let i = 0; i < voices.length; i++) {
-      if (voices[i].name === selected) {
-        utterThis.voice = voices[i];
-        break;
-      }
-    }
-
-    utterThis.onend = (event) => {
-      console.log("SpeechSynthesisUtterance.onend");
-    };
+    utterThis.voice = voices.find((voice) => voice.name === selectedVoice);
 
     utterThis.onerror = (event) => {
       console.error("SpeechSynthesisUtterance.onerror");
@@ -51,24 +62,47 @@
 
   const voices = populateVoiceList();
 
+  const pause = () => {
+    if (synth.speaking) {
+      synth.pause();
+      console.log("Paused");
+    }
+  };
+
   const voiceSelected = () => {
-    speak("Hello World");
+    speak(lyrics);
   };
 
   const speakText = (): void => {
-    speak("Hello World");
+    if (synth.speaking) {
+      console.error("Already speaking");
+      return;
+    }
+
+    /**if (synth.paused && synth.pending) synth.resume();
+    else speak(lyrics); */
+    console.log("speakText");
+    speak("Hello World!");
   };
 </script>
 
-<form on:submit|preventDefault={speakText}>
-  <select bind:value={selected} on:blur={voiceSelected}>
-    {#each voices as voice}
-      <option value={voice.name}>
-        {voice.name} - ({voice.lang})
-      </option>
-    {/each}
-  </select>
-  <div class="controls">
-    <button id="play" type="submit">Play</button>
-  </div>
-</form>
+<textarea bind:value={lyrics} readonly />
+
+<select bind:value={selectedVoice} on:blur={voiceSelected}>
+  {#each voices as voice}
+    <option value={voice.name}>
+      {voice.name} - ({voice.lang})
+    </option>
+  {/each}
+</select>
+<div class="controls">
+  <button id="play" on:click|once={speakText}>Play</button>
+  <button id="pause" on:click|once={pause}>Pause</button>
+</div>
+
+<style>
+  textarea {
+    width: 500px;
+    height: 200px;
+  }
+</style>

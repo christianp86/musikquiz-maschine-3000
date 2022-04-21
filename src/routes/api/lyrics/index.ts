@@ -12,23 +12,20 @@ const MUSIXMATCH_URL = 'https://api.musixmatch.com/ws/1.1/matcher.lyrics.get'
 export async function get({ params } ): Promise<RequestHandlerOutput> {
     const musixmatchUrl = new URL(MUSIXMATCH_URL)
     musixmatchUrl.searchParams.append('format', 'json')
-    musixmatchUrl.searchParams.append('q_track', params.get('track'))
-    musixmatchUrl.searchParams.append('q_artist', params.get('artist'))
+    musixmatchUrl.searchParams.append('q_track', params?.track)
+    musixmatchUrl.searchParams.append('q_artist', params?.artist)
     musixmatchUrl.searchParams.append('apikey', API_KEY)
 
     const response = await fetch(musixmatchUrl.href);
 
-    if (response.ok) {
+    if (response.ok && response.status === 200) {
         const lyricsResponse = await response.json()
         let lyrics: string = lyricsResponse?.message?.body?.lyrics?.lyrics_body
         lyrics = lyrics.slice(0, lyrics.indexOf('...'))
-        const lyrics_result = {
-            text: lyrics
-        }
 
         return {
             status: 200,
-            body: lyrics_result
+            body: JSON.stringify(lyrics)
         };
     }
 }
