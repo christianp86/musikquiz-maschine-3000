@@ -74,15 +74,14 @@
   };
 
   const speakText = (): void => {
-    if (synth.speaking) {
-      console.error("Already speaking");
-      return;
+    if (synth.paused) {
+      synth.resume();
+      console.log("Resumed");
+    } else {
+      speak(lyrics);
+      console.log("Speaking");
     }
 
-    /**if (synth.paused && synth.pending) synth.resume();
-    else speak(lyrics); */
-    console.log("speakText");
-    speak("Hello World!");
   };
 </script>
 

@@ -7,6 +7,7 @@
 
   import type { Track } from "$lib/utils/spotify/Types";
   import Speech from "./Speech.svelte";
+  import Translator from "./Translator.svelte";
   export let track: Track;
 
   let playbackSettings: PlaybackSettings = PlaybackSettings.Song;
@@ -40,7 +41,7 @@
       <Speech artist={track.album.artist.name} trackName={track.name} />
       {#if playbackSettings === PlaybackSettings.Translate}
         <div class="translate_controls">
-          <p>Hier sind die Translate Controls</p>
+          <Translator lyrics="Hello World!" />
         </div>
       {/if}
     </div>
