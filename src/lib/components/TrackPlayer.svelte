@@ -2,12 +2,10 @@
   enum PlaybackSettings {
     Song = "SONG",
     Lyrics = "LYRICS",
-    Translate = "TRANSLATE",
   }
 
   import type { Track } from "$lib/utils/spotify/Types";
   import Speech from "./Speech.svelte";
-  import Translator from "./Translator.svelte";
   export let track: Track;
 
   let playbackSettings: PlaybackSettings = PlaybackSettings.Song;
@@ -36,14 +34,9 @@
       </div>
     {/if}
   </div>
-  {#if playbackSettings === PlaybackSettings.Lyrics || playbackSettings === PlaybackSettings.Translate}
+  {#if playbackSettings === PlaybackSettings.Lyrics}
     <div class="speech_controls">
       <Speech artist={track.album.artist.name} trackName={track.name} />
-      {#if playbackSettings === PlaybackSettings.Translate}
-        <div class="translate_controls">
-          <Translator lyrics="Hello World!" />
-        </div>
-      {/if}
     </div>
   {/if}
   <div class="playback_settings">
@@ -64,15 +57,6 @@
         value={PlaybackSettings.Lyrics}
       />
       Lyrcis vorlesen
-    </label>
-
-    <label>
-      <input
-        type="radio"
-        bind:group={playbackSettings}
-        value={PlaybackSettings.Translate}
-      />
-      Lyrics übersetzt vorlesen
     </label>
   </div>
 </div>

@@ -23,6 +23,11 @@ body {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
 /** =================== MONTSERRAT =================== **/
 
 /** Montserrat Thin **/

@@ -1,6 +1,7 @@
 <script lang="ts">
   export let lyrics;
   let translatedLyrics;
+  let buttonDisabled = true;
 
   const translateLyrics = async () => {
     const urlParameter = new URLSearchParams();
@@ -16,6 +17,13 @@
       console.log(translateLyrics);
     }
   };
+
+  $: if (lyrics !== undefined && lyrics !== "") {
+    buttonDisabled = false;
+  }
 </script>
 
-<button on:click|once={translateLyrics}>Übersetzen</button>
+<button on:click|once={translateLyrics} 
+  disabled={buttonDisabled}>
+  Übersetzen
+</button>

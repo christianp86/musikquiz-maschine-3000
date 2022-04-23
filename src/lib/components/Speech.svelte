@@ -1,4 +1,9 @@
+<script context="module">
+  export const ssr = false;
+</script>
+
 <script lang="ts">
+  import Translator from "./Translator.svelte";
   import { onMount } from "svelte";
 
   const synth = window.speechSynthesis;
@@ -81,7 +86,6 @@
       speak(lyrics);
       console.log("Speaking");
     }
-
   };
 </script>
 
@@ -99,9 +103,12 @@
   <button id="pause" on:click|once={pause}>Pause</button>
 </div>
 
+<Translator {lyrics} />
+
 <style>
   textarea {
     width: 500px;
     height: 200px;
   }
+
 </style>
