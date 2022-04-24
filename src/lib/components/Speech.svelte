@@ -1,7 +1,3 @@
-<script context="module">
-  export const ssr = false;
-</script>
-
 <script lang="ts">
   import Translator from "./Translator.svelte";
   import { onMount } from "svelte";
