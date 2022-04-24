@@ -6,11 +6,14 @@
   import Translator from "./Translator.svelte";
   import { onMount } from "svelte";
 
-  const synth = window.speechSynthesis;
-
   export let artist: string;
   export let trackName: string;
 
+  let voices: SpeechSynthesisVoice[] = [];
+  const synth = window.speechSynthesis;
+  let selectedVoice: SpeechSynthesisVoice;
+  let pitch = 1;
+  let rate = 1;
   let lyrics = "";
 
   onMount(async () => {
@@ -23,11 +26,10 @@
     if (request.ok) {
       lyrics = await request.json();
     }
-  });
 
-  let selectedVoice = "";
-  let pitch = 1;
-  let rate = 1;
+    voices = populateVoiceList();
+    selectedVoice = voices[0];
+  });
 
   const populateVoiceList = (): SpeechSynthesisVoice[] => {
     const voices = synth.getVoices().sort((a, b) => {
@@ -54,7 +56,7 @@
 
     let utterThis = new SpeechSynthesisUtterance(text);
 
-    utterThis.voice = voices.find((voice) => voice.name === selectedVoice);
+    utterThis.voice = voices.find((voice) => voice.name === selectedVoice.name);
 
     utterThis.onerror = (event) => {
       console.error("SpeechSynthesisUtterance.onerror");
@@ -64,8 +66,6 @@
     utterThis.rate = rate;
     synth.speak(utterThis);
   };
-
-  const voices = populateVoiceList();
 
   const pause = () => {
     if (synth.speaking) {
@@ -89,18 +89,19 @@
   };
 </script>
 
-<textarea bind:value={lyrics} readonly />
+<textarea bind:value={lyrics} readonly rows="10" cols="200" />
 
-<select bind:value={selectedVoice} on:blur={voiceSelected}>
-  {#each voices as voice}
-    <option value={voice.name}>
-      {voice.name} - ({voice.lang})
-    </option>
-  {/each}
-</select>
 <div class="controls">
-  <button id="play" on:click|once={speakText}>Play</button>
-  <button id="pause" on:click|once={pause}>Pause</button>
+  <button id="play" on:click={speakText}>Lyrics vorlesen</button>
+  <button id="pause" on:click={pause}>Pause</button>
+  <!-- <select bind:value={selectedVoice} on:blur={voiceSelected}> -->
+  <select bind:value={selectedVoice}>
+    {#each voices as voice}
+      <option value={voice}>
+        {voice.name} - ({voice.lang})
+      </option>
+    {/each}
+  </select>
 </div>
 
 <Translator {lyrics} />
@@ -108,7 +109,5 @@
 <style>
   textarea {
     width: 500px;
-    height: 200px;
   }
-
 </style>
