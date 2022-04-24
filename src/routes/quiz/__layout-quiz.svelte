@@ -1,6 +1,14 @@
 <script context="module" lang="ts">
+  import { ROUTE_HOME } from "$lib/constants";
   /** @type {import('@sveltejs/kit').Load} */
   export async function load({ session }) {
+    if (session.user.name === "guest") {
+      return {
+        status: 302,
+        redirect: ROUTE_HOME,
+      };
+    }
+    console.log('Session in load function: ', session);
     return {
       props: {
         session: session,
@@ -10,11 +18,11 @@
 </script>
 
 <script lang="ts">
+  //import type { User } from "@supabase/gotrue-js//dist/main/lib/types";
   import { supabase } from "$lib/utils/supabaseClient";
-  import type { User } from "@supabase/gotrue-js//dist/main/lib/types";
-  export let session
 
-  const user: User = session?.user;
+  export let session;
+  const user = session.user;
 
   /**
    * Logout user from supabase
@@ -41,7 +49,7 @@
   </main>
 
   <footer>
-    <p>{user?.user_metadata?.full_name}</p>
+    <p>{user?.name}</p>
   </footer>
 </div>
 

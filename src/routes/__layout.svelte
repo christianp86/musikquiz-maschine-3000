@@ -11,6 +11,7 @@
   supabase.auth.onAuthStateChange(async (event, _session) => {
     switch (event) {
       case "SIGNED_IN":
+        // TODO: Refactor to use type: { name : string }
         session.set({ user: _session.user });
         await setAuthCookie(event, _session);
         goto(ROUTE_QUIZ);

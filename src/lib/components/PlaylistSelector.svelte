@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PlaylistBaseObject } from "$lib/utils/spotify/Types";
-  export let playLists: PlaylistBaseObject[];
+  export let playLists: PlaylistBaseObject[] = [];
 </script>
 
 <select name="Spotify Playlist">
