@@ -11,14 +11,19 @@
   supabase.auth.onAuthStateChange(async (event, _session) => {
     switch (event) {
       case "SIGNED_IN":
-        // TODO: Refactor to use type: { name : string }
-        session.set({ user: _session.user });
+        session.set({
+          user: {
+            id: _session.user.id,
+            aud: _session.user.aud,
+            name: _session.user.user_metadata["full_name"],
+          },
+        });
         await setAuthCookie(event, _session);
         goto(ROUTE_QUIZ);
         break;
 
       default:
-        session.set({ user: { guest: true } });
+        session.set({ user: undefined });
         await unsetAuthCookie();
         goto(ROUTE_HOME);
         break;
