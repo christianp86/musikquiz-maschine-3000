@@ -2,6 +2,14 @@
   import Translator from "./Translator.svelte";
   import { onMount } from "svelte";
 
+  type TranslatedEventType = Translator['$$events_def']['translated'];
+
+  const handleLoaded = ({ detail }: TranslatedEventType) => {
+    translatedLyrics = detail;
+    text = translatedLyrics;
+  }
+
+
   export let artist: string;
   export let trackName: string;
 
@@ -11,6 +19,8 @@
   let pitch = 1;
   let rate = 1;
   let lyrics = "";
+  let translatedLyrics = "";
+  let text = "";
 
   onMount(async () => {
     const urlParameter = new URLSearchParams();
@@ -21,6 +31,7 @@
     const request = await fetch(apiUrl);
     if (request.ok) {
       lyrics = await request.json();
+      text = lyrics;
     }
 
     voices = populateVoiceList();
@@ -79,13 +90,13 @@
       synth.resume();
       console.log("Resumed");
     } else {
-      speak(lyrics);
+      speak(text);
       console.log("Speaking");
     }
   };
 </script>
 
-<textarea bind:value={lyrics} readonly rows="10" cols="200" />
+<textarea bind:value={text} readonly rows="10" cols="200" />
 
 <div class="controls">
   <button id="play" on:click={speakText}>Lyrics vorlesen</button>
@@ -100,7 +111,7 @@
   </select>
 </div>
 
-<Translator {lyrics} />
+<Translator {lyrics} on:translated={handleLoaded}/>
 
 <style>
   textarea {

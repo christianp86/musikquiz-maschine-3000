@@ -14,7 +14,7 @@ export async function post({ request }): Promise<RequestHandlerOutput> {
     const targetLanguage = body?.language;
     const lyrics = body?.lyrics;
 
-    console.log(`Translating ${lyrics} to ${targetLanguage}`)
+    console.log(`Translating to ${targetLanguage}`)
 
     if (targetLanguage === undefined || lyrics === undefined) {
         return {
@@ -23,10 +23,9 @@ export async function post({ request }): Promise<RequestHandlerOutput> {
     }
     const translator = new deepl.Translator(apiKey);
     const result = await translator.translateText(lyrics, null, targetLanguage);
-    console.log(result.text); // Bonjour, le monde !
 
-    return {
+    return result ? {
         status: 201,
         body: JSON.stringify(result.text)
-    };
+    } : { status: 400 };
 }
