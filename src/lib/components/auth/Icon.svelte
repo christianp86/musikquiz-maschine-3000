@@ -8,7 +8,7 @@
   }
 
   export let name
-  export let size = 10
+  export let size:number = 10
 </script>
 
 <svelte:component this={map[name]} {size}/>

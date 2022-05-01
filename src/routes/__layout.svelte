@@ -31,28 +31,6 @@
   });
 </script>
 
-<div class="container">
-  <header>
-    <slot name="header" />
-  </header>
-
-  <main>
-    <slot />
-  </main>
-
-  <footer>
-    <slot name="footer" />
-  </footer>
+<div>
+  <slot />
 </div>
-
-<style>
-  .container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1;
-  }
-</style>

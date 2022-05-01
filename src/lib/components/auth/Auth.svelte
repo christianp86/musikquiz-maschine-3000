@@ -8,7 +8,7 @@
   export let view = "sign_in";
 </script>
 
-<div class="authContainer">
+<div class="flex flex-col justify-center">
   <SocialAuthView
     {supabaseClient}
     {providers}
@@ -18,11 +18,3 @@
     {view}
   />
 </div>
-
-<style>
-  .authContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-</style>

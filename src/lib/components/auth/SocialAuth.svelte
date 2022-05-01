@@ -40,10 +40,7 @@
 </script>
 
 {#if hasProviders}
-  <h2>Welcome</h2>
-  <span class="heading">Sign in to Musikquiz Maschine 3000.</span>
-
-  <div class="providers" class:horizontal={socialLayout == "horizontal"}>
+  <div class="flex flex-col flex-gap-5 mt-1 gap-2">
     {#each providers as provider}
       <Button
         block
@@ -67,21 +64,5 @@
 <style>
   * {
     text-align: center;
-  }
-  .providers {
-    margin-top: 0.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .providers.horizontal {
-    flex-direction: row;
-  }
-
-  .heading {
-    font-weight: 500;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    margin: 0 0 0.5rem 0;
   }
 </style>

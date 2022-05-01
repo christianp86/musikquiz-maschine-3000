@@ -32,18 +32,18 @@
   }
 </script>
 
-<div class="container">
-  <header>
-    <span class="title">Musikquiz Maschine 3000</span>
-    <nav>
-      <ul>
-        <li class="text-clickable" on:click={logout}>Logout</li>
+<div class="flex flex-col min-h-screen v-screen">
+  <header class="my-1 mx-2 py-4 px-4 flex justify-between items-center rounded">
+    <span class="grow">Musikquiz Maschine 3000</span>
+    <nav class="grow-0">
+      <ul class="flex justify-end items-center list-none">
+        <li class="cursor-pointer ml-1" on:click={logout}>Logout</li>
       </ul>
     </nav>
     <slot name="header" />
   </header>
 
-  <main>
+  <main class="flex-1 px-4 pt-4">
     <slot />
   </main>
 
@@ -53,41 +53,8 @@
 </div>
 
 <style>
-  .container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
   header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1em;
-    background-color: var(--header-color);
+    background-color: var(--clr-30);
   }
 
-  .title {
-    flex-grow: 1;
-  }
-
-  nav {
-    flex-grow: 0;
-  }
-
-  ul {
-    display: flex;
-    list-style: none;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  li {
-    margin-left: 1rem;
-  }
-
-  main {
-    flex: 1;
-    margin: 0 10%;
-  }
 </style>
