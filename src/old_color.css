@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --base-hue: 270;
-  --base-sat: 85%;
+  --base-hue: 200;
+  --base-sat: 75%;
 
   /* full color palette, from dark to light */
   --clr-10: hsl(var(--base-hue), var(--base-sat), 10%);
@@ -18,7 +18,7 @@
   --clr-90: hsl(var(--base-hue), var(--base-sat), 90%);
   --clr-95: hsl(var(--base-hue), var(--base-sat), 95%);
 
-  --primary-lightness: 20%;
+  --primary-lightness: 50%;
 
   /* primary color in varying opacity levels */
   --primary: hsl(var(--base-hue), var(--base-sat), var(--primary-lightness));
@@ -53,7 +53,7 @@
     10%
   );
 
-  --accent-hue: calc(var(--base-hue) + 135);
+  --accent-hue: calc(var(--base-hue) + 90);
   --accent-lightness: 50%;
 
   /* accent color in varying opacity levels */
