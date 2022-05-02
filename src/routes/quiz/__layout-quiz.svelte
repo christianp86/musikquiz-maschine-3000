@@ -33,7 +33,7 @@
 </script>
 
 <div class="flex flex-col min-h-screen v-screen">
-  <header class="my-1 mx-2 py-4 px-4 flex justify-between items-center rounded">
+  <header class="bg-base_color-30 my-1 mx-2 py-4 px-4 flex justify-between items-center rounded">
     <span class="grow">Musikquiz Maschine 3000</span>
     <nav class="grow-0">
       <ul class="flex justify-end items-center list-none">
@@ -43,7 +43,7 @@
     <slot name="header" />
   </header>
 
-  <main class="flex-1 px-4 pt-4">
+  <main class="flex-1 px-20 pt-4">
     <slot />
   </main>
 
@@ -51,10 +51,3 @@
     <p>{user?.name}</p>
   </footer>
 </div>
-
-<style>
-  header {
-    background-color: var(--clr-30);
-  }
-
-</style>

@@ -17,6 +17,7 @@ module.exports = {
         80: getCSSVariable('--clr-80'),
         90: getCSSVariable('--clr-90'),
         95: getCSSVariable('--clr-95'),
+        100: getCSSVariable('--clr'),
       },
       primary: {
         10: getCSSVariable('--primary-10'),
@@ -24,6 +25,7 @@ module.exports = {
         25: getCSSVariable('--primary-25'),
         50: getCSSVariable('--primary-50'),
         75: getCSSVariable('--primary-75'),
+        100: getCSSVariable('--primary'),
       },
       accent: {
         10: getCSSVariable('--accent-10'),
@@ -31,6 +33,7 @@ module.exports = {
         25: getCSSVariable('--accent-25'),
         50: getCSSVariable('--accent-50'),
         75: getCSSVariable('--accent-75'),
+        100: getCSSVariable('--accent'),
       }
     },
     extend: {},
