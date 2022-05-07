@@ -20,9 +20,19 @@
 </script>
 
 <Steps activeStep={$currentStep} />
-<slot />
+<div class="flex flex-col justify-center">
+  <slot />
 
-<div class="flex flex-col md:flex-row items-center">
-  <button class="bg-base_color-30 round-lg p-4"disabled={$currentStep === 1} on:click={previousStep}>Zurück</button>
-  <button class="bg-base_color-30 round-lg p-4" disabled={$currentStep === 4} on:click={nextStep}>Weiter</button>
+  <div class="flex flex-col md:flex-row items-center gap-5">
+    <button
+      class="bg-base_color-30 round-lg p-4"
+      disabled={$currentStep === 1}
+      on:click={previousStep}>Zurück</button
+    >
+    <button
+      class="bg-base_color-30 round-lg p-4"
+      disabled={$currentStep === 4}
+      on:click={nextStep}>Weiter</button
+    >
+  </div>
 </div>
