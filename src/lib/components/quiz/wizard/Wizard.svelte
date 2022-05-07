@@ -6,21 +6,18 @@
   setContext("step", currentStep);
 
   const nextStep = () => {
-    console.log("NEXT STEP");
     currentStep.update((n) => n + 1);
-    console.log("$step", $currentStep);
   };
 
   const previousStep = () => {
-    console.log("PREVIOUS STEP");
     if ($currentStep > 0) {
-      $currentStep -= 1;
+      currentStep.update((n) => n - 1);
     }
   };
 </script>
 
 <Steps activeStep={$currentStep} />
-<div class="flex flex-col justify-center">
+<div class="flex flex-col justify-center items-center mt-8">
   <slot />
 
   <div class="flex flex-col md:flex-row items-center gap-5">
