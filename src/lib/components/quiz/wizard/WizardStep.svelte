@@ -11,7 +11,7 @@
         "WizardStep compound components cannot be rendered outside the Wizard component"
       );
     }
-    console.log("context", context);
+    //console.log("context", context);
     return context;
   };
 

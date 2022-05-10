@@ -20,7 +20,7 @@
 <div class="flex flex-col justify-center items-center mt-8">
   <slot />
 
-  <div class="flex flex-col md:flex-row items-center gap-5">
+  <div class="flex flex-row items-center gap-5 mt-8">
     <button
       class="bg-base_color-30 hover:bg-base_color-40 rounded-lg p-4"
       disabled={$currentStep === 1}
